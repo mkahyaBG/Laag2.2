@@ -572,7 +572,7 @@ h1 em { font-style: italic; color: var(--accent-dark); }
       <textarea id="id_desc" class="form-textarea" placeholder="Beschrijf wat de toepassing doet, voor wie het bedoeld is, in welke context het wordt gebruikt en welk type output het genereert..." style="min-height:140px"></textarea>
       <div class="char-count" id="id_desc_count">0 / min. 150 woorden</div>
     </div>
-    <div class="form-error full" id="id-error">Vul minimaal de verplichte velden in (organisatie, naam, e-mail, toepassingsnaam en beschrijving).</div>
+    <div class="form-error full" id="id-error">Vul minimaal de naam van de organisatie en een geldig e-mailadres in.</div>
   </div>
   <div style="margin-top:32px;display:flex;justify-content:flex-end">
     <button class="btn-next enabled" onclick="startModules()">Ga naar Module 1 →</button>
@@ -1969,15 +1969,12 @@ function showIdentification() { showScreen('screen-identification'); }
 
 function startModules() {
   const org = document.getElementById('id_org').value.trim();
-  const name = document.getElementById('id_name').value.trim();
   const email = document.getElementById('id_email').value.trim();
-  const app = document.getElementById('id_appname').value.trim();
-  const desc = document.getElementById('id_desc').value.trim();
-  if (!org || !name || !email || !app || !desc || desc.split(/\s+/).length < 30) {
+  if (!org || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     document.getElementById('id-error').classList.add('visible');
     return;
   }
-  idData = { org, country: document.getElementById('id_country').value.trim(), kvk: document.getElementById('id_kvk').value.trim(), name, role: document.getElementById('id_role').value.trim(), email, appname: app, desc };
+  idData = { org, country: document.getElementById('id_country').value.trim(), kvk: document.getElementById('id_kvk').value.trim(), name: document.getElementById('id_name').value.trim(), role: document.getElementById('id_role').value.trim(), email, appname: document.getElementById('id_appname').value.trim(), desc: document.getElementById('id_desc').value.trim() };
   currentIdx = 0; history = []; answers = {};
   showScreen('screen-question');
   renderQ();
