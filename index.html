@@ -1,0 +1,2693 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EU AI Act Applicability Assessment — bg.legal</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root {
+  --ink: #2F302F;
+  --paper: #DEDAC6;
+  --cream: #ede8dc;
+  --accent: #B9B9EB;
+  --accent-dark: #8585cc;
+  --accent-light: #f0eff9;
+  --muted: #7a7468;
+  --white: #fdfaf5;
+  --green: #2d7a5f;
+  --green-light: #e4f0eb;
+  --red: #c8401e;
+  --red-light: #f5e8e4;
+  --amber: #c9841e;
+  --amber-light: #f5ede0;
+  --border: rgba(47,48,47,0.12);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999; opacity: 0.4;
+}
+/* ── HEADER ── */
+header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 48px;
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; background: var(--paper); z-index: 200;
+  backdrop-filter: blur(4px);
+}
+.logo {
+  font-family: 'DM Serif Display', serif; font-size: 1.2rem;
+  letter-spacing: -0.01em; color: var(--ink);
+  display: flex; align-items: center; gap: 10px;
+}
+.logo-dot { width: 8px; height: 8px; background: var(--accent-dark); border-radius: 50%; }
+.header-right { display: flex; align-items: center; gap: 16px; }
+.badge {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--muted);
+  border: 1px solid var(--border); padding: 5px 12px; border-radius: 100px;
+}
+/* ── SCREENS ── */
+.screen { display: none; }
+.screen.active { display: block; animation: fadeUp 0.4s ease; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+/* ── INTRO ── */
+#screen-intro {
+  max-width: 840px; margin: 0 auto; padding: 80px 48px 80px; text-align: center;
+}
+.eyebrow {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--accent-dark); margin-bottom: 24px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.eyebrow::before, .eyebrow::after {
+  content: ''; display: block; width: 48px; height: 1px;
+  background: var(--accent-dark); opacity: 0.45;
+}
+h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.6rem, 5vw, 4rem); line-height: 1.08;
+  letter-spacing: -0.025em; margin-bottom: 28px;
+}
+h1 em { font-style: italic; color: var(--accent-dark); }
+.hero-sub {
+  font-size: 1.05rem; line-height: 1.75; color: var(--muted);
+  font-weight: 300; max-width: 600px; margin: 0 auto 52px;
+}
+.meta-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 16px;
+  max-width: 680px; margin: 0 auto 52px;
+}
+.meta-card {
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: 8px; padding: 18px 16px; text-align: left;
+}
+.meta-card-icon { font-size: 1.3rem; margin-bottom: 8px; }
+.meta-card-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.meta-card-value { font-size: 0.9rem; font-weight: 500; color: var(--ink); }
+.btn-start {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--ink); color: var(--white);
+  font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500;
+  padding: 20px 44px; border: none; border-radius: 4px; cursor: pointer;
+  transition: all 0.25s ease; letter-spacing: 0.01em; margin-bottom: 20px;
+}
+.btn-start:hover {
+  background: var(--accent-dark); transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(133,133,204,0.35);
+}
+.btn-start .arrow { transition: transform 0.25s; }
+.btn-start:hover .arrow { transform: translateX(4px); }
+.modules-overview {
+  margin-top: 64px; padding-top: 44px;
+  border-top: 1px solid var(--border);
+}
+.modules-label {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 20px;
+}
+.modules-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 10px;
+}
+.module-tag {
+  background: var(--cream); border: 1px solid var(--border);
+  border-radius: 4px; padding: 10px 14px; text-align: left;
+}
+.module-tag-num { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 4px; }
+.module-tag-name { font-size: 0.82rem; font-weight: 500; color: var(--ink); }
+
+/* ── IDENTIFICATION SCREEN ── */
+#screen-identification {
+  max-width: 780px; margin: 0 auto; padding: 60px 48px 80px;
+}
+.screen-header { margin-bottom: 40px; }
+.screen-eyebrow {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--accent-dark); margin-bottom: 10px;
+}
+.screen-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem); letter-spacing: -0.02em; line-height: 1.2;
+}
+.screen-title em { font-style: italic; color: var(--accent-dark); }
+.screen-sub {
+  font-size: 0.9rem; color: var(--muted); font-weight: 300; line-height: 1.65;
+  margin-top: 10px; max-width: 540px;
+}
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-field { display: flex; flex-direction: column; gap: 6px; }
+.form-field.full { grid-column: 1/-1; }
+.form-label {
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.07em;
+  text-transform: uppercase; color: var(--muted);
+}
+.form-input, .form-textarea {
+  font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+  color: var(--ink); background: var(--white);
+  border: 1.5px solid var(--border); border-radius: 6px;
+  padding: 13px 16px; outline: none; transition: border-color 0.2s;
+}
+.form-input:focus, .form-textarea:focus { border-color: var(--accent-dark); }
+.form-input.error { border-color: var(--red); }
+.form-textarea { resize: vertical; min-height: 110px; }
+.form-hint {
+  font-size: 0.78rem; color: var(--muted); font-weight: 300; margin-top: 2px;
+}
+.form-error { font-size: 0.78rem; color: var(--red); display: none; }
+.form-error.visible { display: block; }
+
+/* ── QUESTION SCREEN ── */
+#screen-question { max-width: 860px; margin: 0 auto; padding: 44px 48px 80px; }
+.progress-area { margin-bottom: 32px; }
+.progress-top {
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;
+}
+.progress-module {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--accent-dark);
+}
+.progress-count { font-size: 0.78rem; font-weight: 600; color: var(--muted); }
+.progress-track {
+  height: 3px; background: var(--border); border-radius: 2px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: var(--accent-dark);
+  transition: width 0.5s cubic-bezier(0.4,0,0.2,1); border-radius: 2px;
+}
+.question-id {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 6px; margin-top: 24px;
+}
+.question-text {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.2rem, 2.2vw, 1.75rem); line-height: 1.3;
+  letter-spacing: -0.02em; color: var(--ink); margin-bottom: 10px;
+}
+.question-hint {
+  font-size: 0.86rem; color: var(--muted); font-weight: 300; line-height: 1.65;
+  background: var(--cream); border-left: 3px solid var(--accent-dark);
+  padding: 10px 14px; border-radius: 0 4px 4px 0; margin-bottom: 26px;
+}
+.question-legal {
+  font-size: 0.75rem; font-weight: 500; color: var(--accent-dark);
+  font-style: italic; margin-bottom: 24px; display: flex; align-items: center; gap: 6px;
+}
+/* options */
+.options-list { display: flex; flex-direction: column; gap: 9px; margin-bottom: 32px; }
+.option-btn {
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: 6px; padding: 14px 18px; text-align: left; cursor: pointer;
+  transition: all 0.18s ease; display: flex; align-items: flex-start; gap: 14px;
+  font-family: 'DM Sans', sans-serif; width: 100%;
+}
+.option-btn:hover { border-color: var(--accent-dark); background: var(--accent-light); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(47,48,47,0.07); }
+.option-btn.selected { border-color: var(--accent-dark); background: var(--accent-light); box-shadow: 0 0 0 3px rgba(133,133,204,0.15); }
+.option-btn.stop { border-color: var(--red); }
+.option-btn.stop.selected { background: var(--red-light); border-color: var(--red); box-shadow: 0 0 0 3px rgba(200,64,30,0.12); }
+.option-indicator {
+  width: 20px; height: 20px; min-width: 20px;
+  border: 1.5px solid var(--border); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 1px; transition: all 0.18s; flex-shrink: 0;
+}
+.option-btn.selected .option-indicator { border-color: var(--accent-dark); background: var(--accent-dark); }
+.option-btn.selected .option-indicator::after { content: ''; width: 7px; height: 7px; background: white; border-radius: 50%; }
+.option-btn.stop.selected .option-indicator { border-color: var(--red); background: var(--red); }
+.option-label { font-size: 0.92rem; font-weight: 500; color: var(--ink); line-height: 1.4; }
+.option-sub { font-size: 0.8rem; color: var(--muted); font-weight: 300; margin-top: 3px; line-height: 1.4; }
+/* checkbox style */
+.option-btn.checkbox .option-indicator { border-radius: 4px; }
+.option-btn.checkbox.selected .option-indicator::after { content: '✓'; font-size: 0.73rem; border-radius: 0; background: transparent; color: white; font-weight: 700; }
+/* free text */
+.free-text-wrap { margin-bottom: 32px; }
+.free-text-area {
+  font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--ink);
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: 6px; padding: 14px 18px; width: 100%; outline: none;
+  transition: border-color 0.2s; resize: vertical; min-height: 100px; line-height: 1.6;
+}
+.free-text-area:focus { border-color: var(--accent-dark); }
+.char-count { font-size: 0.75rem; color: var(--muted); text-align: right; margin-top: 4px; }
+/* table input */
+.table-input-wrap { margin-bottom: 32px; overflow-x: auto; }
+.table-input { width: 100%; border-collapse: collapse; }
+.table-input th {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); padding: 8px 12px; background: var(--cream);
+  border: 1px solid var(--border); text-align: left;
+}
+.table-input td { padding: 6px 8px; border: 1px solid var(--border); background: var(--white); }
+.table-input td input {
+  font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--ink);
+  background: transparent; border: none; width: 100%; outline: none; padding: 4px 6px;
+}
+.table-input td select {
+  font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--ink);
+  background: transparent; border: none; width: 100%; outline: none; padding: 4px 6px; cursor: pointer;
+}
+/* stop notice */
+.stop-notice {
+  background: var(--red-light); border: 1.5px solid var(--red);
+  border-radius: 8px; padding: 18px 20px; margin-bottom: 24px;
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.stop-notice-icon { font-size: 1.3rem; flex-shrink: 0; }
+.stop-notice-title { font-weight: 600; font-size: 0.95rem; color: var(--red); margin-bottom: 4px; }
+.stop-notice-text { font-size: 0.85rem; color: var(--ink); line-height: 1.6; font-weight: 300; }
+/* conditional sub-question */
+.sub-question {
+  background: var(--cream); border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0; padding: 16px 18px; margin-top: 10px; margin-bottom: 16px;
+}
+.sub-question-label {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--accent-dark); margin-bottom: 6px;
+}
+.sub-question-text { font-size: 0.9rem; font-weight: 500; color: var(--ink); margin-bottom: 10px; line-height: 1.4; }
+/* nav */
+.nav-row {
+  display: flex; justify-content: space-between; align-items: center; margin-top: 8px;
+  padding-top: 24px; border-top: 1px solid var(--border);
+}
+.btn-back {
+  background: none; border: none; font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem; color: var(--muted); cursor: pointer;
+  display: flex; align-items: center; gap: 6px; padding: 8px 0; transition: color 0.2s;
+}
+.btn-back:hover { color: var(--ink); }
+.btn-next {
+  background: var(--ink); color: var(--white);
+  font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500;
+  padding: 13px 30px; border: none; border-radius: 4px; cursor: pointer;
+  display: flex; align-items: center; gap: 8px;
+  transition: all 0.2s; opacity: 0.3; pointer-events: none;
+}
+.btn-next.enabled { opacity: 1; pointer-events: all; }
+.btn-next.enabled:hover { background: var(--accent-dark); transform: translateY(-1px); }
+/* module nav sidebar hint */
+.module-breadcrumb {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.crumb {
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--muted); padding: 4px 10px; border-radius: 3px; background: var(--cream);
+  border: 1px solid var(--border);
+}
+.crumb.active { background: var(--accent-light); color: var(--accent-dark); border-color: var(--accent); }
+
+/* ── EMAIL GATE ── */
+#screen-email {
+  max-width: 580px; margin: 0 auto; padding: 90px 48px 80px; text-align: center;
+}
+.email-icon {
+  width: 72px; height: 72px; background: var(--accent-light); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 32px; font-size: 1.8rem;
+}
+.email-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem); letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 14px;
+}
+.email-title em { font-style: italic; color: var(--accent-dark); }
+.email-sub {
+  font-size: 0.95rem; color: var(--muted); font-weight: 300;
+  line-height: 1.7; margin-bottom: 40px; max-width: 440px; margin-left: auto; margin-right: auto;
+}
+.email-fields { display: flex; flex-direction: column; gap: 12px; margin-bottom: 14px; }
+.email-submit {
+  width: 100%; background: var(--ink); color: var(--white);
+  font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500;
+  padding: 18px 32px; border: none; border-radius: 6px; cursor: pointer;
+  transition: all 0.25s; display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.email-submit:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(133,133,204,0.35); }
+.email-submit:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
+.privacy-note { font-size: 0.75rem; color: var(--muted); margin-top: 14px; line-height: 1.6; font-weight: 300; }
+
+/* ── RESULTS ── */
+#screen-results { max-width: 1020px; margin: 0 auto; padding: 56px 48px 80px; }
+.results-hero {
+  margin-bottom: 48px; padding-bottom: 36px;
+  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px;
+}
+.results-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem); letter-spacing: -0.02em; line-height: 1.15;
+}
+.results-title em { font-style: italic; color: var(--accent-dark); }
+.results-meta { font-size: 0.85rem; color: var(--muted); font-weight: 300; margin-top: 8px; }
+.overall-verdict {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; padding: 7px 16px; border-radius: 100px;
+}
+.overall-verdict.critical { background: #2a0a0a; color: #ff8c8c; }
+.overall-verdict.high { background: var(--red-light); color: var(--red); }
+.overall-verdict.medium { background: var(--amber-light); color: var(--amber); }
+.overall-verdict.low { background: var(--green-light); color: var(--green); }
+/* section */
+.results-section { margin-top: 48px; }
+.results-section-title {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.results-section-title::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+/* verdict cards */
+.verdict-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; }
+.verdict-card {
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: 8px; padding: 18px 20px;
+}
+.verdict-card-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.verdict-card-value { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--ink); line-height: 1.3; }
+.verdict-card-value.red { color: var(--red); }
+.verdict-card-value.amber { color: var(--amber); }
+.verdict-card-value.green { color: var(--green); }
+.verdict-card-value.accent { color: var(--accent-dark); }
+/* red flags */
+.flags-list { display: flex; flex-direction: column; gap: 12px; }
+.flag-card {
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: 8px; padding: 20px 22px; display: flex; gap: 16px; align-items: flex-start;
+}
+.flag-card.critical { background: var(--red-light); border-color: var(--red); }
+.flag-card.high { background: var(--amber-light); border-color: var(--amber); }
+.flag-card.medium { background: var(--cream); border-color: rgba(47,48,47,0.2); }
+.flag-icon { width: 38px; height: 38px; min-width: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+.flag-icon.critical { background: var(--red-light); border: 1px solid rgba(200,64,30,0.25); }
+.flag-icon.high { background: var(--amber-light); border: 1px solid rgba(201,132,30,0.25); }
+.flag-icon.medium { background: var(--cream); border: 1px solid var(--border); }
+.flag-icon.info { background: var(--green-light); border: 1px solid rgba(45,122,95,0.25); }
+.flag-body { flex: 1; }
+.flag-level {
+  font-size: 0.66rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; margin-bottom: 5px; display: inline-block;
+  padding: 2px 8px; border-radius: 3px;
+}
+.flag-level.critical { color: var(--red); background: rgba(200,64,30,0.1); }
+.flag-level.high { color: var(--amber); background: rgba(201,132,30,0.1); }
+.flag-level.medium { color: var(--muted); background: rgba(122,116,104,0.12); }
+.flag-level.info { color: var(--green); background: rgba(45,122,95,0.1); }
+.flag-name { font-weight: 600; font-size: 0.95rem; color: var(--ink); margin-bottom: 6px; }
+.flag-desc { font-size: 0.84rem; color: var(--muted); line-height: 1.6; font-weight: 300; }
+.flag-legal { font-size: 0.75rem; color: var(--accent-dark); font-style: italic; margin-top: 6px; font-weight: 500; }
+.flag-action { font-size: 0.82rem; color: var(--ink); margin-top: 8px; font-weight: 500; }
+/* module results */
+.module-result { margin-bottom: 28px; }
+.module-result-header {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+  padding-bottom: 10px; border-bottom: 1px solid var(--border);
+}
+.module-result-num {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--white); background: var(--accent-dark); padding: 3px 9px; border-radius: 3px;
+}
+.module-result-name { font-weight: 600; font-size: 1rem; color: var(--ink); }
+.module-result-verdict {
+  margin-left: auto; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; padding: 4px 12px; border-radius: 100px;
+}
+.module-result-verdict.ok { background: var(--green-light); color: var(--green); }
+.module-result-verdict.warn { background: var(--amber-light); color: var(--amber); }
+.module-result-verdict.block { background: var(--red-light); color: var(--red); }
+.module-result-verdict.na { background: var(--cream); color: var(--muted); }
+.module-result-verdict.info { background: var(--accent-light); color: var(--accent-dark); }
+/* answers table */
+.answers-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; margin-top: 8px; }
+.answers-table th {
+  text-align: left; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted); padding: 8px 12px;
+  background: var(--cream); border-bottom: 2px solid var(--border);
+}
+.answers-table td {
+  padding: 10px 12px; border-bottom: 1px solid rgba(47,48,47,0.06);
+  vertical-align: top; line-height: 1.5;
+}
+.answers-table tr:hover td { background: rgba(47,48,47,0.02); }
+.answer-badge-skip {
+  font-size: 0.7rem; font-weight: 600; padding: 2px 8px; border-radius: 3px;
+  background: var(--cream); color: var(--muted); letter-spacing: 0.04em;
+}
+/* cta */
+.cta-block {
+  background: var(--ink); border-radius: 10px; padding: 40px 44px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 24px; margin-top: 52px;
+}
+.cta-text h3 { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--white); margin-bottom: 6px; }
+.cta-text p { font-size: 0.88rem; color: rgba(255,255,255,0.5); font-weight: 300; }
+.cta-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-cta {
+  background: var(--accent-dark); color: white;
+  font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 600;
+  padding: 13px 26px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s;
+}
+.btn-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-restart {
+  background: none; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.65);
+  font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
+  padding: 13px 22px; border-radius: 4px; cursor: pointer; transition: all 0.2s;
+}
+.btn-restart:hover { border-color: rgba(255,255,255,0.5); color: white; }
+.disclaimer {
+  font-size: 0.75rem; color: var(--muted); margin-top: 28px;
+  line-height: 1.65; font-weight: 300; padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+/* download bar */
+.download-bar {
+  background: var(--white); border: 1.5px solid rgba(133,133,204,0.35);
+  border-radius: 8px; padding: 18px 22px; display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 14px; margin-bottom: 22px;
+}
+.download-bar-info { display: flex; align-items: center; gap: 12px; }
+.download-icon {
+  width: 40px; height: 40px; background: var(--accent-light); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+}
+.download-title { font-weight: 600; font-size: 0.93rem; color: var(--ink); }
+.download-sub { font-size: 0.78rem; color: var(--muted); font-weight: 300; margin-top: 2px; }
+.btn-download {
+  background: var(--ink); color: var(--white);
+  font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500;
+  padding: 11px 22px; border: none; border-radius: 4px; cursor: pointer;
+  display: flex; align-items: center; gap: 8px; transition: all 0.2s; white-space: nowrap;
+}
+.btn-download:hover { background: var(--accent-dark); }
+/* roles table */
+.roles-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.role-card {
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: 8px; padding: 18px 20px;
+}
+.role-card-name { font-weight: 600; font-size: 0.95rem; color: var(--ink); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+.role-pill {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 100px;
+}
+.role-pill.active { background: var(--accent-light); color: var(--accent-dark); border: 1px solid rgba(133,133,204,0.3); }
+.role-pill.inactive { background: var(--cream); color: var(--muted); border: 1px solid var(--border); }
+.role-card-obligations { font-size: 0.82rem; color: var(--muted); line-height: 1.6; font-weight: 300; }
+/* mobile */
+@media(max-width:640px){
+  header { padding: 18px 24px; }
+  #screen-intro, #screen-identification, #screen-question, #screen-results, #screen-email { padding: 32px 24px 60px; }
+  .meta-grid { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .roles-grid { grid-template-columns: 1fr; }
+  .verdict-grid { grid-template-columns: 1fr 1fr; }
+  .results-hero { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><span class="logo-dot"></span>AI Act Assessment</div>
+  <div class="header-right">
+    <div class="badge">EU AI Act · Volledig Assessment</div>
+  </div>
+</header>
+<!-- ══ INTRO ══════════════════════════════════════════════ -->
+<div id="screen-intro" class="screen active">
+  <div class="eyebrow">EU AI Act Applicability Assessment</div>
+  <h1>Breng uw <em>AI Act</em><br>verplichtingen in kaart</h1>
+  <p class="hero-sub">Een volledig, diepgaand assessment van uw AI-toepassing op basis van de EU AI Act en de officiële Commissie-guidelines. Geen quickscan — een gedocumenteerd oordeel per element.</p>
+  <div class="meta-grid">
+    <div class="meta-card"><div class="meta-card-icon">⏱</div><div class="meta-card-label">Tijdsinvestering</div><div class="meta-card-value">60–120 minuten</div></div>
+    <div class="meta-card"><div class="meta-card-icon">📋</div><div class="meta-card-label">Modules</div><div class="meta-card-value">6 thematische modules</div></div>
+    <div class="meta-card"><div class="meta-card-icon">🔒</div><div class="meta-card-label">Vertrouwelijkheid</div><div class="meta-card-value">100% vertrouwelijk</div></div>
+  </div>
+  <button class="btn-start" onclick="showIdentification()">Start het assessment <span class="arrow">→</span></button>
+  <p style="font-size:0.8rem;color:var(--muted);font-weight:300">Betrek een technisch én juridisch/compliance-verantwoordelijke bij het invullen.</p>
+  <div class="modules-overview">
+    <div class="modules-label">Structuur van het assessment</div>
+    <div class="modules-grid">
+      <div class="module-tag"><div class="module-tag-num">Identificatie</div><div class="module-tag-name">Toepassing & invuller</div></div>
+      <div class="module-tag"><div class="module-tag-num">Module 1</div><div class="module-tag-name">Is er een AI-systeem?</div></div>
+      <div class="module-tag"><div class="module-tag-num">Module 2</div><div class="module-tag-name">Rolbepaling in de waardeketen</div></div>
+      <div class="module-tag"><div class="module-tag-num">Module 3</div><div class="module-tag-name">Verboden praktijken (art. 5)</div></div>
+      <div class="module-tag"><div class="module-tag-num">Module 4</div><div class="module-tag-name">Risicoclassificatie</div></div>
+      <div class="module-tag"><div class="module-tag-num">Module 5</div><div class="module-tag-name">GPAI & AI Agent</div></div>
+      <div class="module-tag"><div class="module-tag-num">Module 6</div><div class="module-tag-name">Fase & rode vlaggen</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ IDENTIFICATION ════════════════════════════════════ -->
+<div id="screen-identification" class="screen">
+  <div class="screen-header">
+    <div class="screen-eyebrow">Identificatie</div>
+    <div class="screen-title">Identificatie van de <em>invuller</em> en de toepassing</div>
+    <p class="screen-sub">Vul onderstaande gegevens zo volledig mogelijk in. De informatie wordt opgenomen in het eindrapport.</p>
+  </div>
+  <div class="form-grid" id="id-form">
+    <div class="form-field"><label class="form-label">I.1 Naam organisatie</label><input id="id_org" class="form-input" placeholder="Naam van de organisatie"/></div>
+    <div class="form-field"><label class="form-label">Land van vestiging</label><input id="id_country" class="form-input" placeholder="Bijv. Nederland"/></div>
+    <div class="form-field"><label class="form-label">KvK-nummer of equivalent</label><input id="id_kvk" class="form-input" placeholder="Registratienummer"/></div>
+    <div class="form-field"><label class="form-label">I.2 Naam invuller</label><input id="id_name" class="form-input" placeholder="Voor- en achternaam"/></div>
+    <div class="form-field"><label class="form-label">Functie invuller</label><input id="id_role" class="form-input" placeholder="Bijv. Chief Compliance Officer"/></div>
+    <div class="form-field"><label class="form-label">E-mailadres</label><input id="id_email" type="email" class="form-input" placeholder="naam@organisatie.nl"/></div>
+    <div class="form-field"><label class="form-label">I.3 Naam/werktitel AI-toepassing</label><input id="id_appname" class="form-input" placeholder="Werktitel of naam van de toepassing"/></div>
+    <div class="form-field full">
+      <label class="form-label">I.4 Beschrijving van de toepassing <span style="font-weight:300;text-transform:none;letter-spacing:0">(minimaal 150 woorden)</span></label>
+      <textarea id="id_desc" class="form-textarea" placeholder="Beschrijf wat de toepassing doet, voor wie het bedoeld is, in welke context het wordt gebruikt en welk type output het genereert..." style="min-height:140px"></textarea>
+      <div class="char-count" id="id_desc_count">0 / min. 150 woorden</div>
+    </div>
+    <div class="form-error full" id="id-error">Vul minimaal de verplichte velden in (organisatie, naam, e-mail, toepassingsnaam en beschrijving).</div>
+  </div>
+  <div style="margin-top:32px;display:flex;justify-content:flex-end">
+    <button class="btn-next enabled" onclick="startModules()">Ga naar Module 1 →</button>
+  </div>
+</div>
+
+<!-- ══ QUESTION SCREEN ══════════════════════════════════ -->
+<div id="screen-question" class="screen">
+  <div class="progress-area">
+    <div class="progress-top">
+      <div class="progress-module" id="q-module-label"></div>
+      <div class="progress-count" id="q-count"></div>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="q-progress" style="width:0%"></div></div>
+  </div>
+  <div class="module-breadcrumb" id="module-breadcrumb"></div>
+  <div id="stop-notice" class="stop-notice" style="display:none">
+    <div class="stop-notice-icon">🛑</div>
+    <div><div class="stop-notice-title" id="stop-title"></div><div class="stop-notice-text" id="stop-text"></div></div>
+  </div>
+  <div class="question-id" id="q-id"></div>
+  <div class="question-text" id="q-text"></div>
+  <div class="question-hint" id="q-hint" style="display:none"></div>
+  <div class="question-legal" id="q-legal" style="display:none"><span>⚖</span><span id="q-legal-text"></span></div>
+  <div id="options-wrap"><div class="options-list" id="options-list"></div></div>
+  <div id="free-wrap" class="free-text-wrap" style="display:none">
+    <textarea class="free-text-area" id="free-input" placeholder="Typ uw antwoord hier..."></textarea>
+    <div class="char-count" id="free-count"></div>
+  </div>
+  <div id="table-wrap" class="table-input-wrap" style="display:none"></div>
+  <div id="sub-questions-wrap"></div>
+  <div class="nav-row">
+    <button class="btn-back" id="btn-back" onclick="prevQ()">← Vorige</button>
+    <button class="btn-next" id="btn-next" onclick="nextQ()">Volgende →</button>
+  </div>
+</div>
+
+<!-- ══ EMAIL GATE ═══════════════════════════════════════ -->
+<div id="screen-email" class="screen">
+  <div class="email-icon">📄</div>
+  <div class="email-title">Uw assessment is <em>gereed</em></div>
+  <p class="email-sub">Het rapport wordt per e-mail verzonden. Vul hieronder uw zakelijke e-mailadres in om het volledige PDF-rapport te ontvangen.</p>
+  <div class="email-fields">
+    <input type="email" id="gate-email" class="form-input" placeholder="zakelijk@emailadres.nl" oninput="clearGateError()"/>
+    <div class="form-error" id="gate-error">Voer een geldig e-mailadres in.</div>
+    <button class="email-submit" id="btn-gate-submit" onclick="submitGate()">Genereer en ontvang rapport →</button>
+  </div>
+  <p class="privacy-note">🔒 Uw gegevens worden vertrouwelijk behandeld en niet gedeeld met derden.</p>
+</div>
+
+<!-- ══ RESULTS ══════════════════════════════════════════ -->
+<div id="screen-results" class="screen">
+  <div class="results-hero">
+    <div>
+      <div id="overall-verdict" class="overall-verdict high" style="margin-bottom:12px"></div>
+      <div class="results-title">EU AI Act <em>Assessment</em><br>Rapport</div>
+      <div class="results-meta" id="results-meta"></div>
+    </div>
+  </div>
+
+  <div class="results-section">
+    <div class="results-section-title">Deel II — Kwalificatieoordeel</div>
+    <div class="verdict-grid" id="part2-grid"></div>
+  </div>
+
+  <div class="results-section">
+    <div class="results-section-title">Deel III — Rollenmatrix</div>
+    <div class="roles-grid" id="part3-roles"></div>
+  </div>
+
+  <div class="results-section">
+    <div class="results-section-title">Deel IV — Verbodsbeoordeling (art. 5)</div>
+    <div class="flags-list" id="part4-list"></div>
+  </div>
+
+  <div class="results-section">
+    <div class="results-section-title">Deel V — Risicoclassificatie</div>
+    <div class="verdict-grid" id="part5-grid"></div>
+  </div>
+
+  <div class="results-section" id="part6-section">
+    <div class="results-section-title">Deel VI — GPAI & AI Agent</div>
+    <div id="part6-content"></div>
+  </div>
+
+  <div class="results-section">
+    <div class="results-section-title">Deel VII — Rode vlaggen & aanbevelingen</div>
+    <div class="flags-list" id="part7-list"></div>
+  </div>
+
+  <div class="results-section">
+    <div class="results-section-title">Deel VIII — Vereiste documentatie</div>
+    <div id="part8-content"></div>
+  </div>
+
+  <div class="results-section">
+    <div class="results-section-title">Uw antwoorden</div>
+    <table class="answers-table"><thead><tr><th>Vraag-ID</th><th>Vraag</th><th>Antwoord</th></tr></thead><tbody id="answers-tbody"></tbody></table>
+  </div>
+
+  <div style="margin-top:40px">
+    <div class="download-bar">
+      <div class="download-bar-info">
+        <div class="download-icon">📄</div>
+        <div><div class="download-title">Download volledig rapport als PDF</div><div class="download-sub">Inclusief alle bevindingen, rollenmatrix en aanbevelingen</div></div>
+      </div>
+      <button class="btn-download" id="btn-dl" onclick="downloadPDF()">↓ Download PDF</button>
+    </div>
+    <div class="cta-block">
+      <div class="cta-text"><h3>Vervolgtraject starten?</h3><p>Plan een gratis gesprek met een AI Act-specialist om de uitkomsten om te zetten in een compliant implementatieplan.</p></div>
+      <div class="cta-btns">
+        <button class="btn-cta" onclick="window.open('mailto:info@bg.legal?subject=Vervolgtraject EU AI Act Assessment','_blank')">Neem contact op →</button>
+        <button class="btn-restart" onclick="restartAssessment()">Opnieuw beginnen</button>
+      </div>
+    </div>
+    <p class="disclaimer">⚠️ Deel IX — Disclaimer. Dit rapport is een oriënterend instrument op basis van de door de invuller verstrekte informatie. De uitkomsten zijn indicatief en vormen geen juridisch advies. BG.Legal aanvaardt geen aansprakelijkheid voor beslissingen die uitsluitend op dit rapport worden gebaseerd. Raadpleeg een gekwalificeerde jurist gespecialiseerd in EU digitale regelgeving voor specifiek juridisch advies.</p>
+  </div>
+</div>
+<script>
+// ═══════════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════════
+let answers = {};
+let history = [];
+let currentIdx = 0;
+let userEmail = '';
+let idData = {};
+
+const MODULES = {
+  id: 'Identificatie',
+  m1: 'Module 1 — AI-systeem?',
+  m2: 'Module 2 — Rolbepaling',
+  m3: 'Module 3 — Verboden',
+  m4: 'Module 4 — Risicoclassificatie',
+  m5: 'Module 5 — GPAI & Agent',
+  m6: 'Module 6 — Fase & rode vlaggen'
+};
+
+// ═══════════════════════════════════════════════════════════════
+// HELPER LOGIC
+// ═══════════════════════════════════════════════════════════════
+const a = () => answers;
+const has = (id, val) => { const v = answers[id]; return Array.isArray(v) ? v.includes(val) : v === val; };
+const notNo = (id) => answers[id] && answers[id] !== 'no';
+const isYes = (id) => answers[id] === 'yes';
+const isNo = (id) => answers[id] === 'no';
+
+// Module 1 derived
+function isAISystem() {
+  if (isNo('m1_1')) return false;
+  if (isNo('m1_2')) return false;
+  if (isNo('m1_3') && answers['m1_4'] && has('m1_4','rules_only')) return false;
+  if (has('m1_7','none')) return false;
+  if (has('m1_8','no')) return false;
+  return true;
+}
+function isInScope() {
+  if (!isAISystem()) return false;
+  if (isNo('m1_10')) return false;
+  if (has('m1_11','military') || has('m1_11','rnd') || has('m1_11','personal') || has('m1_11','opensource')) return false;
+  return true;
+}
+function hasGPAI() {
+  return isYes('m1_12a') || notNo('m1_12b');
+}
+function isGPAIProvider() { return isYes('m1_12a'); }
+function isAgent() { return answers['m1_13'] === 'yes' || answers['m1_13'] === 'partial'; }
+function isProvider() { return answers['m2_2a'] === 'yes_internal' || answers['m2_2a'] === 'yes_outsourced' || isYes('m2_2b'); }
+function isDeployer() { return isYes('m2_3'); }
+function isImporter() { return answers['m2_4a'] === 'yes'; }
+function isDistributor() { return answers['m2_4b'] === 'yes'; }
+function isGPAIModelProvider() { return isYes('m2_5'); }
+function hasHighRiskBijlageI() { return answers['m4_a2'] === 'yes' && answers['m4_a3'] === 'yes'; }
+function hasHighRiskBijlageIII() {
+  const cats = answers['m4_b1'];
+  return Array.isArray(cats) && cats.some(v => v !== 'none');
+}
+function isHighRisk() { return hasHighRiskBijlageI() || (hasHighRiskBijlageIII() && answers['m4_b2'] !== 'yes'); }
+function hasForbiddenFlag() {
+  return (has('m3_a1','none') === false && isYes('m3_a4') && isYes('m3_a5') && !isYes('m3_a6')) ||
+    (isYes('m3_b2') && isYes('m3_b3')) ||
+    (isYes('m3_c1') && (isYes('m3_c2') || isYes('m3_c3')) && !isYes('m3_c4')) ||
+    (isYes('m3_d1') && answers['m3_d2'] === 'profiling' && !isYes('m3_d3') && !isYes('m3_d4')) ||
+    (isYes('m3_e1') && isYes('m3_e2') && isYes('m3_e3') && !isYes('m3_e4')) ||
+    (isYes('m3_f1') && isYes('m3_f2') && !isYes('m3_f3')) ||
+    (isYes('m3_g1') && isYes('m3_g2') && !isYes('m3_g3') && !isYes('m3_g4')) ||
+    (isYes('m3_h1') && isYes('m3_h2') && answers['m3_h3'] && !answers['m3_h3'].some(v=>v!=='none'));
+}
+
+// ═══════════════════════════════════════════════════════════════
+// QUESTION DEFINITIONS
+// ═══════════════════════════════════════════════════════════════
+const questions = [
+
+  // ── MODULE 1 ─────────────────────────────────────────────────
+  {
+    id:'m1_1', module:'m1', qid:'1.1',
+    text:'Is de toepassing computationeel gedreven en draait zij op hardware of software?',
+    hint:'Een puur menselijk besluitvormingsproces, handmatige berekeningen of een spreadsheet zonder algoritmische verwerking vallen buiten de definitie. Hybride processen vallen doorgaans wél binnen scope.',
+    legal:'Art. 3(1) EU AI Act; Commissie Guidelines on the definition of an AI system (2025)',
+    type:'single',
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee — puur menselijk of handmatig proces', value:'no', stop:true, stopTitle:'Niet van toepassing', stopText:'De toepassing kwalificeert niet als AI-systeem op grond van art. 3(1) AI Act. Het assessment voor deze toepassing eindigt hier.'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m1_2', module:'m1', qid:'1.2',
+    text:'Werkt de toepassing met een zekere mate van onafhankelijkheid — is zij in staat output te genereren zonder dat elke afzonderlijke output handmatig door een mens wordt gespecificeerd?',
+    hint:'Autonomie vereist niet dat er geen menselijke betrokkenheid is, maar dat het systeem output kan genereren zonder dat die output voor elk geval expliciet door een mens wordt vastgelegd.',
+    legal:'Art. 3(1) EU AI Act; AI Definition Guidelines §2',
+    type:'single',
+    skipIf: () => isNo('m1_1'),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Gedeeltelijk', value:'partial'},
+      {label:'Nee — elk geval wordt handmatig gespecificeerd', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m1_3', module:'m1', qid:'1.3',
+    text:'Maakt de toepassing gebruik van inferentie — leidt zij output af op basis van patronen, regels, statistische relaties of kennisrepresentaties die niet volledig voor elke situatie zijn geprogrammeerd?',
+    hint:'Het inferentievermogen is het sleutelkenmerk dat AI-systemen onderscheidt van klassieke software. Het gaat erom of het systeem conclusies of outputs afleidt die niet volledig door de programmeur zijn voorzien.',
+    legal:'AI Definition Guidelines §3–§4; Overweging 12 EU AI Act',
+    type:'single',
+    skipIf: () => isNo('m1_1'),
+    options:[
+      {label:'Ja — het systeem leidt outputs af die niet volledig vooraf waren bepaald', value:'yes'},
+      {label:'Gedeeltelijk — sommige outputs zijn geïnfereerd, andere zijn volledig gedefinieerd', value:'partial'},
+      {label:'Nee — alle outputs zijn uitputtend vooraf door mensen geprogrammeerd', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m1_4', module:'m1', qid:'1.4',
+    text:'Welke technische methode(n) gebruikt de toepassing? Selecteer alle van toepassing.',
+    hint:'Geef per geselecteerde methode een korte toelichting indien nodig. De keuze is bepalend voor de verdere beoordeling.',
+    legal:'AI Definition Guidelines §3–§4; Overweging 12 EU AI Act',
+    type:'multi',
+    skipIf: () => isNo('m1_1'),
+    options:[
+      {label:'Supervised learning (classificatie, regressie, patroonherkenning)', sub:'Bijv. spamfilters, beeldclassificatie, fraudedetectie', value:'supervised'},
+      {label:'Unsupervised learning (clustering, anomaliedetectie)', sub:'Bijv. drug discovery, klantensegmentatie', value:'unsupervised'},
+      {label:'Self-supervised / reinforcement learning', sub:'Bijv. taalmodellen, robotica, aanbevelingssystemen', value:'selfsup'},
+      {label:'Deep learning / neurale netwerken', sub:'Gelaagde architecturen die kenmerken leren uit ruwe data', value:'deeplearn'},
+      {label:'Logica- en kennisgebaseerde benaderingen / expertsystemen', sub:'Bijv. medische diagnose-expertsystemen, klassieke NLP', value:'logic'},
+      {label:'Statistische modellen (Bayesiaans, probabilistisch)', value:'stats'},
+      {label:'Zoekalgoritmen en optimalisatie (genetisch, heuristisch)', value:'search'},
+      {label:'Generatieve AI / Large Language Models (GPT, diffusie, foundation models)', value:'llm'},
+      {label:'Uitsluitend handmatig gedefinieerde regels — geen leren of statistische inferentie', value:'rules_only'}
+    ]
+  },
+  {
+    id:'m1_5_1', module:'m1', qid:'1.5.1',
+    text:'Wordt de toepassing uitsluitend gebruikt om wiskundige optimalisatiemethoden te verbeteren of te versnellen zonder dat beslissingsmodellen intelligent worden aangepast?',
+    hint:'Voorbeelden: fysica-gebaseerde simulaties die ML gebruiken voor versnelling, satelliet-bandbreedte-optimalisatie. Dit kan wijzen op een uitzondering van de AI-definitie.',
+    legal:'AI Definition Guidelines — uitsluitingen',
+    type:'single',
+    skipIf: () => isNo('m1_1'),
+    options:[
+      {label:'Ja — uitsluitend versnelling/verbetering van optimalisatie, geen intelligente aanpassing', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m1_5_2', module:'m1', qid:'1.5.2',
+    text:'Is de toepassing een basaal gegevensverwerkingssysteem dat uitsluitend vooraf gedefinieerde, expliciete instructies uitvoert zonder te leren, redeneren of modelleren?',
+    hint:'Voorbeelden: databasebeheersystemen voor sorteren/filteren, standaard spreadsheets, systemen uitsluitend voor beschrijvende statistiek of visualisatie.',
+    legal:'AI Definition Guidelines — uitsluitingen',
+    type:'single',
+    skipIf: () => isNo('m1_1'),
+    options:[
+      {label:'Ja — zuiver dataverwerking op vaste instructies', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m1_5_3', module:'m1', qid:'1.5.3',
+    text:'Werkt de toepassing uitsluitend op basis van klassieke heuristieken — vaste regels en probleemoplossingstechnieken zonder data-gedreven leren?',
+    hint:'Voorbeeld: schaakprogramma met minimax-algoritme en heuristische evaluatiefuncties. Klassieke heuristiek zonder ML valt mogelijk buiten de AI-definitie.',
+    legal:'AI Definition Guidelines — uitsluitingen',
+    type:'single',
+    skipIf: () => isNo('m1_1'),
+    options:[
+      {label:'Ja — uitsluitend klassieke heuristieken, geen ML of statistische inferentie', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m1_5_4', module:'m1', qid:'1.5.4',
+    text:'Is de toepassing een eenvoudig voorspellingssysteem waarvan de prestaties bereikt worden via basale statistische methoden die slechts als baseline dienen?',
+    hint:'Voorbeelden: voorspelling via gemiddeldestrategie, temperatuurvoorspelling via historisch gemiddelde, klantservice-tijdschatting op basis van historisch gemiddelde.',
+    legal:'AI Definition Guidelines — uitsluitingen',
+    type:'single',
+    skipIf: () => isNo('m1_1'),
+    options:[
+      {label:'Ja — basale statistische baseline zonder echte inferentie', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m1_6', module:'m1', qid:'1.6',
+    text:'Is de toepassing ontworpen voor een expliciet of impliciet doel — heeft zij een gedefinieerde taak of reeks taken?',
+    hint:'Nagenoeg elk technisch systeem heeft een doel. Expliciete doelstellingen zijn direct gecodeerd. Impliciete doelstellingen zijn afgeleid uit het gedrag. De doelstellingen van het systeem zijn intern en worden onderscheiden van het beoogde gebruik.',
+    legal:'Art. 3(1) EU AI Act',
+    type:'single',
+    skipIf: () => isNo('m1_1'),
+    options:[
+      {label:'Ja — het doel is expliciet gedocumenteerd', value:'yes_explicit'},
+      {label:'Ja — het doel is impliciet af te leiden uit het gedrag', value:'yes_implicit'},
+      {label:'Nee', value:'no'}
+    ]
+  },
+  {
+    id:'m1_7', module:'m1', qid:'1.7',
+    text:'Welk type output genereert de toepassing op basis van de ontvangen input? Selecteer alle van toepassing.',
+    hint:'De outputtypen bepalen mede de verdere risicoanalyse.',
+    legal:'Art. 3(1) EU AI Act',
+    type:'multi',
+    skipIf: () => isNo('m1_1'),
+    options:[
+      {label:'Voorspellingen — schattingen over onbekende waarden op basis van patronen', sub:'Bijv. kredietrisicoschattingen, medische diagnoses', value:'predictions'},
+      {label:'Aanbevelingen — suggesties voor acties, producten of diensten', sub:'Bijv. behandeladviezen, routeoptimalisaties', value:'recommendations'},
+      {label:'Beslissingen — automatische conclusies zonder directe menselijke tussenkomst per output', sub:'Bijv. automatische kredietgoedkeuring, automatische classificatie', value:'decisions'},
+      {label:'Inhoud — genereren van nieuwe tekst, afbeeldingen, audio, video, code', sub:'Bijv. GPT-gebaseerde tekstgeneratie, beeldgeneratie', value:'content'},
+      {label:'Geen van bovenstaande', value:'none'}
+    ]
+  },
+  {
+    id:'m1_8', module:'m1', qid:'1.8',
+    text:'Kan de output van de toepassing reële of virtuele omgevingen beïnvloeden — heeft zij impact op beslissingen over personen, processen, producten of systemen, ook indirect?',
+    hint:'Ook indirecte beïnvloeding volstaat. Het gaat om de mogelijkheid dat de output impact heeft, niet om de zekerheid.',
+    legal:'Art. 3(1) EU AI Act',
+    type:'single',
+    skipIf: () => isNo('m1_1'),
+    options:[
+      {label:'Ja — de output heeft directe of indirecte invloed op beslissingen of omgevingen', value:'yes'},
+      {label:'Nee — de output heeft geen enkel effect op personen, processen of omgevingen', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m1_9', module:'m1', qid:'1.9',
+    text:'Kan de toepassing na ingebruikstelling haar gedrag aanpassen op basis van nieuwe data of ervaringen?',
+    hint:'Aanpassingsvermogen is geen vereiste voor kwalificatie als AI-systeem. Het is een facultatief kenmerk, relevant voor risicobeheers- en monitoringverplichtingen.',
+    legal:'Art. 3(1) EU AI Act',
+    type:'single',
+    skipIf: () => isNo('m1_1'),
+    options:[
+      {label:'Ja — het systeem hertraint of past zich aan na uitrol', value:'yes'},
+      {label:'Nee — het systeem is statisch na uitrol', value:'no'},
+      {label:'Niet van toepassing', value:'na'}
+    ]
+  },
+  {
+    id:'m1_10', module:'m1', qid:'1.10',
+    text:'Wordt de toepassing op de markt aangeboden of in gebruik gesteld in de Europese Unie, of wordt de output ervan gebruikt door personen of organisaties in de EU?',
+    hint:'De AI Act is van toepassing ongeacht de vestigingsplaats van de aanbieder, als de output in de EU wordt gebruikt.',
+    legal:'Art. 2 EU AI Act',
+    type:'single',
+    skipIf: () => !isAISystem(),
+    options:[
+      {label:'Ja — de toepassing wordt in de EU aangeboden of ingezet', value:'yes'},
+      {label:'Deels — ook buiten de EU', value:'partial'},
+      {label:'Nee — uitsluitend buiten de EU, zonder enig EU-effect', value:'no', stop:true, stopTitle:'Buiten territoriale scope', stopText:'De toepassing valt buiten de territoriale werkingssfeer van de AI Act (art. 2). Het assessment voor deze toepassing eindigt hier.'}
+    ]
+  },
+  {
+    id:'m1_11', module:'m1', qid:'1.11',
+    text:'Is een van de volgende uitsluitingen van het toepassingsgebied van toepassing? Selecteer alle van toepassing.',
+    hint:'Dual use (militair én civiel) valt wél binnen scope. De R&D-uitzondering vervalt zodra het systeem intern wordt ingezet.',
+    legal:'Art. 2(3)–(6) EU AI Act',
+    type:'multi',
+    skipIf: () => !isAISystem() || isNo('m1_10'),
+    options:[
+      {label:'Uitsluitend militaire, defensie- of nationale veiligheidsdoeleinden van een EU-lidstaat', value:'military'},
+      {label:'Puur R&D- of testproject — nog niet op markt of in gebruik', value:'rnd'},
+      {label:'Uitsluitend persoonlijk, niet-professioneel gebruik door een natuurlijke persoon', value:'personal'},
+      {label:'Open source licentie (modelgewichten publiek), geen hoog risico en niet art. 5 of 50', value:'opensource'},
+      {label:'Geen van bovenstaande uitsluitingen is van toepassing', value:'none'}
+    ]
+  },
+  {
+    id:'m1_12a', module:'m1', qid:'1.12a',
+    text:'Is de toepassing zelf een GPAI-model — getraind op grote hoeveelheden data, breed toepasbaar voor een groot scala aan taken, ter beschikking gesteld aan downstream providers of gebruikers?',
+    hint:'GPAI-modellen zijn AI-modellen die voor uiteenlopende doeleinden kunnen worden ingezet en doorgaans via API of open source worden aangeboden.',
+    legal:'Art. 3(63)–(66), Art. 51–56 EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Ja — de toepassing is zelf een GPAI-model', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m1_12b', module:'m1', qid:'1.12b',
+    text:'Is de toepassing gebouwd op of integreert zij een GPAI-model van een derde partij (bijv. GPT-4o, Claude, Gemini, Llama, Mistral)?',
+    hint:'Noem het model, versie en provider indien van toepassing.',
+    legal:'Art. 25, Art. 51–56 EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Ja — een extern GPAI-model is geïntegreerd', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m1_13', module:'m1', qid:'1.13',
+    text:'Fungeert de toepassing als een AI agent — voert zij zelfstandig meerdere opeenvolgende acties uit om een doelstelling te bereiken, zonder tussentijdse menselijke goedkeuring van elke stap?',
+    hint:'Noteer welke tools de agent gebruikt (bijv. zoekopdrachten, API-aanroepen, code-executie) en welk type beslissingen hij zelfstandig neemt.',
+    legal:'Art. 3(1) EU AI Act — AI agent als AI-systeem',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Ja — volledig autonome uitvoering van meerdere stappen zonder tussentijdse goedkeuring', value:'yes'},
+      {label:'Gedeeltelijk — enige menselijke controle op kritieke momenten', value:'partial'},
+      {label:'Nee — menselijke goedkeuring per stap', value:'no'}
+    ]
+  },
+
+  // ── MODULE 2 ─────────────────────────────────────────────────
+  {
+    id:'m2_1', module:'m2', qid:'2.1',
+    text:'Is uw organisatie buiten de EU gevestigd maar biedt zij een AI-systeem op de EU-markt aan?',
+    hint:'Organisaties buiten de EU die een systeem op de EU-markt aanbieden zijn verplicht een gemachtigde vertegenwoordiger in de EU aan te stellen.',
+    legal:'Art. 22 EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Nee — organisatie is in de EU gevestigd', value:'no'},
+      {label:'Ja, en een gemachtigde vertegenwoordiger is aangesteld', value:'yes_rep'},
+      {label:'Ja, maar nog geen vertegenwoordiger aangesteld', value:'yes_norep'},
+      {label:'In behandeling', value:'pending'}
+    ]
+  },
+  {
+    id:'m2_2a', module:'m2', qid:'2.2a',
+    text:'Heeft uw organisatie de toepassing zelf ontwikkeld (of laten ontwikkelen) en brengt zij deze op de markt of stelt zij deze in gebruik onder eigen naam of handelsmerk?',
+    hint:'Het uitbesteden van de feitelijke ontwikkeling doet niets af aan de provider-rol als uw organisatie de marktverantwoordelijkheid draagt.',
+    legal:'Art. 3(3) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Ja, volledig intern ontwikkeld', value:'yes_internal'},
+      {label:'Ja, uitbesteed maar onder eigen naam op de markt gebracht', value:'yes_outsourced'},
+      {label:'Nee', value:'no'}
+    ]
+  },
+  {
+    id:'m2_2b', module:'m2', qid:'2.2b',
+    text:'Heeft uw organisatie een bestaand AI-systeem van een andere partij substantieel gewijzigd — op een wijze die het beoogde doel of de conformiteitsstatus raakt?',
+    hint:'Een substantiële wijziging activeert de provider-verplichtingen voor de gewijzigde versie, ook als het origineel door een derde is ontwikkeld.',
+    legal:'Art. 25 EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m2_2c', module:'m2', qid:'2.2c',
+    text:'Is uw organisatie de fabrikant van een product dat de AI-toepassing als geïntegreerd systeem bevat en dat valt onder sectorale EU-harmonisatieregelgeving?',
+    hint:'Bijv. medische hulpmiddelen, machines, motorvoertuigen.',
+    legal:'Art. 6(1), Bijlage I EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'}
+    ]
+  },
+  {
+    id:'m2_3', module:'m2', qid:'2.3',
+    text:'Neemt uw organisatie de AI-toepassing in gebruik voor eigen professionele doeleinden, onder eigen verantwoordelijkheid?',
+    hint:'De deployer gebruikt het systeem maar heeft het niet zelf ontwikkeld.',
+    legal:'Art. 3(4) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'}
+    ]
+  },
+  {
+    id:'m2_3_1', module:'m2', qid:'2.3.1',
+    text:'Zijn er contractuele afspraken met de provider over het beoogde gebruik en de grenzen van dat gebruik?',
+    hint:'',
+    legal:'Art. 26 EU AI Act',
+    type:'single',
+    skipIf: () => !isDeployer() || !isInScope(),
+    options:[
+      {label:'Ja — specifieke contractuele afspraken over gebruik', value:'yes'},
+      {label:'Uitsluitend standaard gebruiksvoorwaarden', value:'terms_only'},
+      {label:'Nee', value:'no'}
+    ]
+  },
+  {
+    id:'m2_3_2', module:'m2', qid:'2.3.2',
+    text:'Gebruikt uw organisatie de toepassing voor een doel dat wezenlijk afwijkt van het gebruik waarvoor de provider het systeem heeft bedoeld?',
+    hint:'Gebruik buiten het beoogde doel kan ertoe leiden dat uw organisatie voor dat gebruik als provider wordt aangemerkt.',
+    legal:'Art. 25 EU AI Act',
+    type:'single',
+    skipIf: () => !isDeployer() || !isInScope(),
+    options:[
+      {label:'Ja — gebruik wijkt wezenlijk af van de intended purpose', value:'yes'},
+      {label:'Nee — gebruik is binnen het beoogde doel', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m2_3_3', module:'m2', qid:'2.3.3',
+    text:'Is uw organisatie een publieke instantie of een private organisatie die diensten van algemeen belang verricht?',
+    hint:'Voor bepaalde deployers (publieke instanties en vergelijkbare private organisaties) geldt de verplichting tot een Fundamental Rights Impact Assessment (FRIA) bij hoog-risicosystemen.',
+    legal:'Art. 27 EU AI Act',
+    type:'single',
+    skipIf: () => !isDeployer() || !isInScope(),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'}
+    ]
+  },
+  {
+    id:'m2_4a', module:'m2', qid:'2.4a',
+    text:'Brengt uw organisatie een AI-toepassing die buiten de EU is ontwikkeld op de EU-markt, zonder provider of gemachtigde vertegenwoordiger van de provider te zijn?',
+    hint:'',
+    legal:'Art. 3(7) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Ja — wij zijn de importeur', value:'yes'},
+      {label:'Nee', value:'no'}
+    ]
+  },
+  {
+    id:'m2_4b', module:'m2', qid:'2.4b',
+    text:'Stelt uw organisatie een AI-toepassing van een andere partij beschikbaar op de EU-markt als doorverkoper of wederverkoper, zonder provider of importeur te zijn?',
+    hint:'',
+    legal:'Art. 3(8) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Ja — wij zijn de distributeur', value:'yes'},
+      {label:'Nee', value:'no'}
+    ]
+  },
+  {
+    id:'m2_5', module:'m2', qid:'2.5',
+    text:'Ontwikkelt of biedt uw organisatie een GPAI-model aan dat door andere organisaties of gebruikers wordt ingezet?',
+    hint:'',
+    legal:'Art. 3(63)–(66), Art. 51–56 EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m2_5_1', module:'m2', qid:'2.5.1',
+    text:'Worden de modelgewichten openbaar beschikbaar gesteld (open source)?',
+    hint:'Open source GPAI-modellen genieten gedeeltelijke vrijstelling van informatieplichten, maar NOOIT voor modellen met systemisch risico.',
+    legal:'Art. 53(2) EU AI Act',
+    type:'single',
+    skipIf: () => !isGPAIModelProvider() || !isInScope(),
+    options:[
+      {label:'Ja, volledig — modelgewichten zijn publiek beschikbaar', value:'full'},
+      {label:'Gedeeltelijk', value:'partial'},
+      {label:'Nee', value:'no'}
+    ]
+  },
+  {
+    id:'m2_5_2', module:'m2', qid:'2.5.2',
+    text:'Is berekend of de cumulatieve trainingsrekenkapaciteit van het model boven de drempel van 10²⁵ FLOP ligt?',
+    hint:'Modellen boven de 10²⁵ FLOP-drempel worden als modellen met systemisch risico aangemerkt en zijn onderworpen aan aanvullende verplichtingen.',
+    legal:'Art. 51(1)(a) EU AI Act',
+    type:'single',
+    skipIf: () => !isGPAIModelProvider() || !isInScope(),
+    options:[
+      {label:'Ja, berekend — onder de drempel', value:'below'},
+      {label:'Ja, berekend — boven of nabij de drempel', value:'above'},
+      {label:'Nee — berekening nog niet uitgevoerd', value:'no_calc'}
+    ]
+  },
+  {
+    id:'m2_6a', module:'m2', qid:'2.6a',
+    text:'Vervult uw organisatie meerdere rollen tegelijk in de AI-waardeketen?',
+    hint:'Bijv. tegelijk provider én deployer, of GPAI-model provider én downstream deployer.',
+    legal:'Art. 22–27 EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Ja — meerdere rollen tegelijk', value:'yes'},
+      {label:'Nee — één rol', value:'no'}
+    ]
+  },
+  {
+    id:'m2_6c', module:'m2', qid:'2.6c',
+    text:'Is contractueel vastgelegd welke partij welke AI Act-verplichtingen draagt?',
+    hint:'Contractuele verdeling is intern bindend maar doet niets af aan de externe aansprakelijkheid richting toezichthouders.',
+    legal:'Art. 22–27 EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Gedeeltelijk', value:'partial'},
+      {label:'Nee', value:'no'}
+    ]
+  },
+
+  // ── MODULE 3 — Verboden ───────────────────────────────────────
+  {
+    id:'m3_a1', module:'m3', qid:'3.A.1',
+    text:'Maakt de toepassing gebruik van subliminale technieken die buiten of onder de drempel van het bewuste waarnemingsvermogen van een persoon werken? Selecteer alle van toepassing.',
+    hint:'Subliminale technieken werken buiten bewust bewustzijn. De AI Act onderscheidt subliminale van doelbewust manipulatieve technieken.',
+    legal:'Art. 5(1)(a) EU AI Act; Prohibited Practices Guidelines §3.A',
+    type:'multi',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Kortstondig flitsende visuele signalen (te snel voor bewuste verwerking)', value:'flash'},
+      {label:'Auditieve boodschappen met laag volume of gemaskeerd', value:'audio'},
+      {label:'Ingebedde beelden die niet bewust worden waargenomen', value:'embed'},
+      {label:'Afleidingsmanipulatie of temporele manipulatie', value:'distract'},
+      {label:'Geen van bovenstaande', value:'none'}
+    ]
+  },
+  {
+    id:'m3_a2', module:'m3', qid:'3.A.2',
+    text:'Maakt de toepassing gebruik van doelbewust manipulatieve technieken — ontworpen om het gedrag van individuen te beïnvloeden op een wijze die hun autonomie en vrije keuzes ondermijnt?',
+    hint:'Het verbod geldt ook als de aanbieder de manipulatie niet beoogde, maar het systeem dergelijke technieken heeft aangeleerd via trainingsdata of reinforcement learning.',
+    legal:'Art. 5(1)(a) EU AI Act',
+    type:'multi',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Sensorische manipulatie om emotionele toestanden te beïnvloeden', value:'sensory'},
+      {label:'Gepersonaliseerde manipulatie gericht op individuele psychologische kwetsbaarheden', value:'personalized'},
+      {label:'Manipulatieve patronen aangeleerd via trainingsdata (ook onbedoeld)', value:'trained'},
+      {label:'Geen van bovenstaande', value:'none'}
+    ]
+  },
+  {
+    id:'m3_a3', module:'m3', qid:'3.A.3',
+    text:'Maakt de toepassing gebruik van misleidende technieken — presenteert zij valse of misleidende informatie om het gedrag van individuen te beïnvloeden?',
+    hint:'Een generatief AI-systeem dat incidenteel hallucineert valt hier niet automatisch onder, mits gebruikers geïnformeerd zijn over de beperkingen.',
+    legal:'Art. 5(1)(a) EU AI Act',
+    type:'multi',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'De toepassing doet zich voor als een menselijke persoon of bekende persoon (deepfake persona)', value:'impersonation'},
+      {label:'De toepassing herkent evaluatieperiodes en stopt tijdelijk ongewenst gedrag', value:'eval_aware'},
+      {label:'De toepassing genereert stelselmatig misleidende informatie met als doel gedrag te beïnvloeden', value:'systematic'},
+      {label:'Geen van bovenstaande', value:'none'}
+    ]
+  },
+  {
+    id:'m3_a4', module:'m3', qid:'3.A.4',
+    text:'Heeft de techniek het doel of effect het gedrag van personen wezenlijk te vertekenen door hun vermogen om een weloverwogen beslissing te nemen aanzienlijk te belemmeren?',
+    hint:'"Wezenlijke vertekening" vereist meer dan een geringe beïnvloeding — het gaat om een aanzienlijke verstoring van de autonome besluitvorming, vergelijkbaar met "wezenlijke verstoring van het economische gedrag" uit de Richtlijn Oneerlijke Handelspraktijken.',
+    legal:'Art. 5(1)(a) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || (has('m3_a1','none') && has('m3_a2','none') && has('m3_a3','none')),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m3_a5', module:'m3', qid:'3.A.5',
+    text:'Veroorzaakt of is de vertekende gedraging redelijkerwijs waarschijnlijk aanzienlijke schade te veroorzaken (fysiek, psychologisch, financieel of economisch)?',
+    hint:'"Aanzienlijke schade" vereist een feitelijke beoordeling: ernst, context, schaal, kwetsbaarheid betrokkenen en omkeerbaarheid. Het verbod geldt ook als de schade nog niet is ingetreden maar redelijkerwijs waarschijnlijk is.',
+    legal:'Art. 5(1)(a) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || !isYes('m3_a4'),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m3_a6', module:'m3', qid:'3.A.6',
+    text:'Is de toepassing een systeem voor legitieme overreding — werkt zij transparant, respecteert zij de autonomie en verschaft zij accurate informatie voor weloverwogen beslissingen?',
+    hint:'Legitieme overreding, ethische reclame en medische behandelingen met toestemming vallen buiten het verbod.',
+    legal:'Art. 5(1)(a) EU AI Act — uitzondering',
+    type:'single',
+    skipIf: () => !isInScope() || (!isYes('m3_a4') || !isYes('m3_a5')),
+    options:[
+      {label:'Ja — transparantie- en autonomiewaarborgen zijn aanwezig', value:'yes'},
+      {label:'Gedeeltelijk', value:'partial'},
+      {label:'Nee', value:'no'}
+    ]
+  },
+  {
+    id:'m3_b1', module:'m3', qid:'3.B.1',
+    text:'Richt de toepassing zich op personen die bijzonder kwetsbaar zijn? Selecteer alle van toepassing.',
+    hint:'',
+    legal:'Art. 5(1)(b) EU AI Act',
+    type:'multi',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Kinderen (minderjarigen)', value:'children'},
+      {label:'Ouderen met verminderde cognitieve capaciteiten', value:'elderly'},
+      {label:'Personen met een mentale, intellectuele of zintuiglijke beperking', value:'disability'},
+      {label:'Personen in een sociaaleconomisch kwetsbare positie', value:'socioeconomic'},
+      {label:'Migranten, vluchtelingen of minderheden in kwetsbare situaties', value:'migrants'},
+      {label:'Geen van bovenstaande', value:'none'}
+    ]
+  },
+  {
+    id:'m3_b2', module:'m3', qid:'3.B.2',
+    text:'Buit de toepassing de kwetsbaarheden van deze groepen actief uit — zijn haar technieken ontworpen om juist op de cognitieve, emotionele of situationele beperkingen in te spelen?',
+    hint:'Voorbeelden: AI-speelgoed dat kinderen aanmoedigt tot gevaarlijk gedrag, verslavende games voor jongeren, misleidende financiële AI voor ouderen.',
+    legal:'Art. 5(1)(b) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || has('m3_b1','none'),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m3_b3', module:'m3', qid:'3.B.3',
+    text:'Veroorzaakt of is de uitbuiting redelijkerwijs waarschijnlijk aanzienlijke schade te veroorzaken?',
+    hint:'',
+    legal:'Art. 5(1)(b) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || !isYes('m3_b2'),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m3_c1', module:'m3', qid:'3.C.1',
+    text:'Evalueert of classificeert de toepassing natuurlijke personen op basis van hun sociaal gedrag of bekende, afgeleide of voorspelde persoonlijke kenmerken, over een bepaalde periode?',
+    hint:'"Sociaal gedrag": acties, gewoonten, interacties. "Persoonlijke kenmerken": geslacht, inkomen, woonplaats, nationaliteit, schulden, werkprestaties. "Voorspelde kenmerken": via AI-inferentie afgeleid.',
+    legal:'Art. 5(1)(c) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m3_c2', module:'m3', qid:'3.C.2',
+    text:'Leidt de score of classificatie tot nadelige behandeling in sociale contexten die geen verband houden met de context waarin de gegevens oorspronkelijk zijn gegenereerd?',
+    hint:'Voorbeeld: een overheidsinstantie gebruikt irrelevant internetgedrag om belastingbetalers voor inspectie te selecteren.',
+    legal:'Art. 5(1)(c) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || !isYes('m3_c1'),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m3_c3', module:'m3', qid:'3.C.3',
+    text:'Leidt de score of classificatie tot behandeling die ongerechtvaardigd of onevenredig is ten opzichte van de ernst van het sociale gedrag?',
+    hint:'Voorbeeld: kleine overtredingen leiden tot zware gevolgen zoals uit huis plaatsing van kinderen.',
+    legal:'Art. 5(1)(c) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || !isYes('m3_c1'),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m3_c4', module:'m3', qid:'3.C.4',
+    text:'Is de scoring bedoeld voor een specifiek, legitiem doel waarbij de gegevens relevant en noodzakelijk zijn en de behandeling gerechtvaardigd en proportioneel?',
+    hint:'Bijv. kredietscoring op financiële data, fraudedetectie op transactiegedrag, verzekeringstarieven op rijgedrag, werknemersevaluaties op werkprestaties.',
+    legal:'Art. 5(1)(c) EU AI Act — uitzondering legitieme scoring',
+    type:'single',
+    skipIf: () => !isInScope() || !isYes('m3_c1'),
+    options:[
+      {label:'Ja — het doel is legitiem, de data relevant, de behandeling proportioneel', value:'yes'},
+      {label:'Gedeeltelijk', value:'partial'},
+      {label:'Nee', value:'no'}
+    ]
+  },
+  {
+    id:'m3_d1', module:'m3', qid:'3.D.1',
+    text:'Voert de toepassing risicobeoordelingen uit van individuele personen om te beoordelen of zij een strafbaar feit zullen plegen?',
+    hint:'',
+    legal:'Art. 5(1)(d) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m3_d2', module:'m3', qid:'3.D.2',
+    text:'Is de risicobeoordeling uitsluitend gebaseerd op profilering of persoonskenmerken, zonder objectieve en verifieerbare feiten die rechtstreeks verband houden met criminele activiteit?',
+    hint:'Het verbod geldt alleen bij uitsluitend profilering/kenmerken. Als objectieve criminele feiten een substantiële rol spelen, valt het systeem buiten het verbod.',
+    legal:'Art. 5(1)(d) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || !isYes('m3_d1'),
+    options:[
+      {label:'Ja — uitsluitend profilering op persoonskenmerken', value:'profiling'},
+      {label:'Nee — objectieve, verifieerbare criminele feiten spelen een substantiële rol', value:'facts'},
+      {label:'Gedeeltelijk', value:'partial'}
+    ]
+  },
+  {
+    id:'m3_d3', module:'m3', qid:'3.D.3',
+    text:'Is de toepassing uitsluitend bedoeld om locatiegebonden of georuimtelijke misdaadpatronen in kaart te brengen, zonder individuele personen te profileren?',
+    hint:'Locatiegebonden misdaadvoorspelling die geen individuen identificeert, valt buiten het verbod.',
+    legal:'Art. 5(1)(d) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || !isYes('m3_d1'),
+    options:[
+      {label:'Ja — uitsluitend georuimtelijk, geen individuele profilering', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Gedeeltelijk', value:'partial'}
+    ]
+  },
+  {
+    id:'m3_d4', module:'m3', qid:'3.D.4',
+    text:'Is de toepassing bedoeld om de menselijke beoordeling te ondersteunen, waarbij die beoordeling reeds gebaseerd is op objectieve criminele feiten en menselijk toezicht is gewaarborgd?',
+    hint:'Als de toepassing uitsluitend ter ondersteuning dient van een menselijke beoordeling op basis van concrete criminele feiten, valt zij buiten het verbod — maar wordt zij waarschijnlijk hoog-risico.',
+    legal:'Art. 5(1)(d) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || !isYes('m3_d1'),
+    options:[
+      {label:'Ja — ondersteuning van menselijke beoordeling op basis van objectieve feiten, met toezicht', value:'yes'},
+      {label:'Nee', value:'no'}
+    ]
+  },
+  {
+    id:'m3_e1', module:'m3', qid:'3.E.1',
+    text:'Verzamelt de toepassing op automatische wijze grote hoeveelheden gezichtsafbeeldingen van het internet of van CCTV-beelden?',
+    hint:'',
+    legal:'Art. 5(1)(e) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m3_e2', module:'m3', qid:'3.E.2',
+    text:'Gebeurt dit verzamelen ongericht — als een "stofzuiger" die zoveel mogelijk data absorbeert, zonder specifiek individu of groep te targeten?',
+    hint:'Gericht scrapen — bijv. zoeken naar afbeeldingen van een specifiek gezochte persoon — valt buiten het verbod.',
+    legal:'Art. 5(1)(e) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || !isYes('m3_e1'),
+    options:[
+      {label:'Ja — ongericht scrapen', value:'yes'},
+      {label:'Nee — gericht op specifieke personen of groepen', value:'no'}
+    ]
+  },
+  {
+    id:'m3_e3', module:'m3', qid:'3.E.3',
+    text:'Is het doel het creëren of uitbreiden van een gezichtsherkenningsdatabase (ook als dit niet het enige doel is)?',
+    hint:'De database hoeft niet uitsluitend voor gezichtsherkenning te zijn — het volstaat dat zij daarvoor kan worden gebruikt.',
+    legal:'Art. 5(1)(e) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || !isYes('m3_e1') || !isYes('m3_e2'),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m3_e4', module:'m3', qid:'3.E.4',
+    text:'Is het doel uitsluitend het genereren van afbeeldingen van fictieve personen, of het etiketteren van rechtmatig verkregen datasets zonder herkenning van echte personen?',
+    hint:'',
+    legal:'Art. 5(1)(e) EU AI Act — uitzondering',
+    type:'single',
+    skipIf: () => !isInScope() || !isYes('m3_e1'),
+    options:[
+      {label:'Ja — uitsluitend fictieve personen of rechtmatige dataset-labeling', value:'yes'},
+      {label:'Nee', value:'no'}
+    ]
+  },
+  {
+    id:'m3_f1', module:'m3', qid:'3.F.1',
+    text:'Wordt de toepassing gebruikt om emoties van individuele personen af te leiden in de context van de werkplek of een onderwijsinstelling?',
+    hint:'"Werkplek" wordt ruim geïnterpreteerd: elke fysieke of virtuele ruimte waar werknemers, aannemers, stagiairs of vrijwilligers werken, inclusief tijdens sollicitaties en proeftijd.',
+    legal:'Art. 5(1)(f) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m3_f2', module:'m3', qid:'3.F.2',
+    text:'Zijn de te detecteren emoties gebaseerd op biometrische gegevens (gezichtsuitdrukkingen, stem, looppatroon, fysiologische signalen)?',
+    hint:'Systemen die fysieke toestanden zoals pijn of vermoeidheid detecteren zonder emoties af te leiden vallen buiten het verbod. Detecteren van een frons om emoties af te leiden valt wél binnen het verbod.',
+    legal:'Art. 5(1)(f) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || !isYes('m3_f1'),
+    options:[
+      {label:'Ja — gebaseerd op biometrische gegevens', value:'yes'},
+      {label:'Nee', value:'no'}
+    ]
+  },
+  {
+    id:'m3_f3', module:'m3', qid:'3.F.3',
+    text:'Is de toepassing bedoeld voor medische doeleinden (als CE-gemarkeerd medisch hulpmiddel) of voor specifieke veiligheidsdoeleinden ter bescherming van leven en gezondheid?',
+    hint:'Alleen een strikt en beperkt uitgelegde uitzondering voor medische of veiligheidsdoeleinden is toegestaan. Algemene monitoring van stressniveaus of werktevredenheid valt hier niet onder.',
+    legal:'Art. 5(1)(f) EU AI Act — uitzondering',
+    type:'single',
+    skipIf: () => !isInScope() || !isYes('m3_f1') || !isYes('m3_f2'),
+    options:[
+      {label:'Ja — CE-gemarkeerd medisch hulpmiddel of strikt veiligheidsdoel', value:'yes'},
+      {label:'Nee', value:'no'}
+    ]
+  },
+  {
+    id:'m3_g1', module:'m3', qid:'3.G.1',
+    text:'Categoriseert de toepassing individuele personen op basis van biometrische gegevens?',
+    hint:'',
+    legal:'Art. 5(1)(g) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m3_g2', module:'m3', qid:'3.G.2',
+    text:'Is het doel of effect het afleiden of infereren van ras, politieke overtuiging, vakbondslidmaatschap, religie, seksleven of seksuele oriëntatie?',
+    hint:'Voorbeelden: ras afleiden uit stemkenmerken, religieuze oriëntatie uit gezichtskenmerken, seksuele oriëntatie uit social media-foto\'s voor gerichte advertenties.',
+    legal:'Art. 5(1)(g) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || !isYes('m3_g1'),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m3_g3', module:'m3', qid:'3.G.3',
+    text:'Is de toepassing een nevenactiviteit van een andere commerciële dienst die strikt noodzakelijk is om objectieve technische redenen?',
+    hint:'Bijv. een filter die lichaamsvorm categoriseert voor virtueel passen van kleding. Twee cumulatieve voorwaarden: nevenactiviteit én strikt technisch noodzakelijk.',
+    legal:'Art. 5(1)(g) EU AI Act — uitzondering',
+    type:'single',
+    skipIf: () => !isInScope() || !isYes('m3_g1') || !isYes('m3_g2'),
+    options:[
+      {label:'Ja — nevenactiviteit en strikt technisch noodzakelijk', value:'yes'},
+      {label:'Nee', value:'no'}
+    ]
+  },
+  {
+    id:'m3_g4', module:'m3', qid:'3.G.4',
+    text:'Betreft de categorisering het etiketteren van rechtmatig verkregen biometrische datasets voor AI-modeltraining, medische diagnostiek of wetshandhavingsdoeleinden?',
+    hint:'',
+    legal:'Art. 5(1)(g) EU AI Act — uitzondering',
+    type:'single',
+    skipIf: () => !isInScope() || !isYes('m3_g1') || !isYes('m3_g2'),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'}
+    ]
+  },
+  {
+    id:'m3_h1', module:'m3', qid:'3.H.1',
+    text:'Wordt de toepassing gebruikt voor realtime biometrische identificatie van individuen op afstand in openbaar toegankelijke ruimten?',
+    hint:'"Openbaar toegankelijke ruimten": winkelstraten, luchthavens, concertzalen, treinstations, sportfaciliteiten. Online ruimten, besloten werkruimten en private ruimten vallen hierbuiten.',
+    legal:'Art. 5(1)(h) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m3_h2', module:'m3', qid:'3.H.2',
+    text:'Wordt dit gebruikt voor wetshandhavingsdoeleinden — door of namens wetshandhavingsinstanties?',
+    hint:'Gebruik door private actoren op eigen initiatief (bijv. supermarkt voor winkeldiefstalpreventie) valt buiten art. 5(1)(h), maar kan wél als hoog-risicosysteem worden geclassificeerd.',
+    legal:'Art. 5(1)(h) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || !isYes('m3_h1'),
+    options:[
+      {label:'Ja — wetshandhavingsdoeleinden', value:'yes'},
+      {label:'Nee — private actoren op eigen initiatief', value:'no'}
+    ]
+  },
+  {
+    id:'m3_h3', module:'m3', qid:'3.H.3',
+    text:'Valt het gebruik onder één van de volgende drie uitsluitingssituaties? Selecteer alle van toepassing.',
+    hint:'Elk ander gebruik voor wetshandhaving dat niet in deze drie categorieën valt, is verboden. Bij uitzondering zijn ook strikte procedurele vereisten verplicht.',
+    legal:'Art. 5(1)(h) EU AI Act — uitzonderingen',
+    type:'multi',
+    skipIf: () => !isInScope() || !isYes('m3_h1') || !isYes('m3_h2'),
+    options:[
+      {label:'Gericht zoeken naar slachtoffers van ontvoering, mensenhandel of vermiste personen', value:'victims'},
+      {label:'Voorkomen van een specifieke, directe bedreiging voor leven of terroristische dreiging', value:'threat'},
+      {label:'Lokaliseren van een specifieke verdachte van ernstig misdrijf (≥ 4 jaar straf, Bijlage II)', value:'suspect'},
+      {label:'Geen van bovenstaande', value:'none'}
+    ]
+  },
+  {
+    id:'m3_i', module:'m3', qid:'3.I',
+    text:'Bevestigt de invuller dat geen van de verboden van art. 5(1)(a)–(h) EU AI Act van toepassing is op deze toepassing?',
+    hint:'Bij twijfel of grensgeval: juridisch advies aanbevolen vóór ingebruikstelling. Een grensgeval is geen groen licht.',
+    legal:'Art. 5 EU AI Act; Prohibited Practices Guidelines',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Ja, ik bevestig dat geen van de verboden van toepassing is', value:'confirmed'},
+      {label:'Nee — er is een potentieel verbod geïdentificeerd', value:'potential_violation'},
+      {label:'Twijfel — grensgeval, nader juridisch onderzoek vereist', value:'borderline'}
+    ]
+  },
+
+  // ── MODULE 4 ──────────────────────────────────────────────────
+  {
+    id:'m4_a1', module:'m4', qid:'4.A.1',
+    text:'Valt het product waarin de AI-toepassing is geïntegreerd onder sectorale EU-harmonisatieregelgeving? Selecteer alle van toepassing.',
+    hint:'',
+    legal:'Art. 6(1), Bijlage I EU AI Act',
+    type:'multi',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Machineverordening (EU) 2023/1230 of Machinerichtlijn 2006/42/EG', value:'machinery'},
+      {label:'Medische Hulpmiddelen Verordening (EU) 2017/745', value:'mdr'},
+      {label:'In-vitrodiagnostiek Verordening (EU) 2017/746', value:'ivdr'},
+      {label:'Motorvoertuigen Verordening (EU) 2019/2144', value:'vehicle'},
+      {label:'Burgerluchtvaart Verordening (EU) 2018/1139', value:'aviation'},
+      {label:'Spoorwegen Richtlijn (EU) 2016/797', value:'rail'},
+      {label:'Speelgoed Richtlijn 2009/48/EG', value:'toys'},
+      {label:'Persoonlijke beschermingsmiddelen (EU) 2016/425', value:'ppe'},
+      {label:'Overige sectorale harmonisatieregelgeving (Bijlage I AI Act)', value:'other_sector'},
+      {label:'Geen van bovenstaande', value:'none'}
+    ]
+  },
+  {
+    id:'m4_a2', module:'m4', qid:'4.A.2',
+    text:'Fungeert de AI-toepassing als veiligheidscomponent van het product — vervult zij een functie waarvan uitval of storing de veiligheid in gevaar kan brengen?',
+    hint:'',
+    legal:'Art. 6(1) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || has('m4_a1','none'),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m4_a3', module:'m4', qid:'4.A.3',
+    text:'Vereist de toepasselijke sectorale regelgeving een conformiteitsbeoordeling door een keuringsinstantie (notified body)?',
+    hint:'',
+    legal:'Art. 6(1), Bijlage I EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || !isYes('m4_a2'),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m4_b1', module:'m4', qid:'4.B.1',
+    text:'Valt de AI-toepassing onder een of meer van de hoog-risico categorieën van Bijlage III? Selecteer alle van toepassing.',
+    hint:'Geef per geselecteerde categorie de specifieke functie van de toepassing.',
+    legal:'Art. 6(2), Bijlage III EU AI Act',
+    type:'multi',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Biometrische identificatie of categorisering (post-hoc identificatie, emotieherkenning buiten werkplek/onderwijs)', sub:'Bijv. post-hoc gezichtsherkenning, emotieherkenning in retail of zorg', value:'biometric'},
+      {label:'Kritieke infrastructuur — veiligheidscomponent (energie, water, wegverkeer, digitale infrastructuur)', sub:'Bijv. AI voor netwerkbeheer energiegrid, verkeersmanagement', value:'critical_infra'},
+      {label:'Onderwijs en beroepsopleiding — toegang, indeling, beoordeling, toetsmonitoring', sub:'Bijv. toelatingssysteem hogeschool, leerresultaten-assessment', value:'education'},
+      {label:'Werkgelegenheid en personeelsbeheer — werving, selectie, prestatiebeoordeling, promotie/ontslag', sub:'Bijv. CV-screeningssysteem, prestatiemonitoring medewerkers', value:'employment'},
+      {label:'Essentiële private en publieke diensten — kredietscoring, verzekeringsprijsstelling, sociale uitkeringen, noodhulp', sub:'Bijv. kredietwaardigheidssysteem, triage-algoritme 112', value:'essential_services'},
+      {label:'Rechtshandhaving — risicobeoordelingen individuen, profilering, leugendetectie, bewijswaardering', sub:'Bijv. recidiverisicobeoordeling, profileringssysteem politie', value:'law_enforcement'},
+      {label:'Migratie en asiel — risicobeoordeling irreguliere migratie, asielbehandeling', sub:'Bijv. fraudedetectie visa, risicoanalyse asielaanvragen', value:'migration'},
+      {label:'Rechtsbedeling en democratische processen — ondersteuning rechters, beïnvloeding verkiezingen', sub:'Bijv. juridisch advies- of voorspellingssysteem voor rechters', value:'justice'},
+      {label:'Geen van bovenstaande', value:'none'}
+    ]
+  },
+  {
+    id:'m4_b2', module:'m4', qid:'4.B.2',
+    text:'Is de toepassing uitsluitend bedoeld als hulpmiddel voor de menselijke beslisser, zonder dat de output een materieel risico vormt op nadelige gevolgen voor gezondheid, veiligheid of grondrechten?',
+    hint:'De bewijslast voor art. 6(3) ligt bij de provider. Dit is een smalle uitzondering. Bij twijfel geldt de hoog-risicoclassificatie.',
+    legal:'Art. 6(3) EU AI Act — uitzondering',
+    type:'single',
+    skipIf: () => !isInScope() || has('m4_b1','none'),
+    options:[
+      {label:'Ja — uitsluitend hulpmiddel, geen materieel risico op nadelige gevolgen', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+  {
+    id:'m4_c1', module:'m4', qid:'4.C.1',
+    text:'Is de toepassing een chatbot of ander systeem dat rechtstreeks in gesprek gaat of communiceert met individuele gebruikers?',
+    hint:'Transparantieverplichting: gebruikers moeten weten dat zij met een AI-systeem communiceren.',
+    legal:'Art. 50(1) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[{label:'Ja', value:'yes'},{label:'Nee', value:'no'}]
+  },
+  {
+    id:'m4_c2', module:'m4', qid:'4.C.2',
+    text:'Genereert de toepassing synthetische audio, beeld, video of tekst die lijkt op echte personen, objecten of plaatsen (deepfakes of synthetische media)?',
+    hint:'',
+    legal:'Art. 50(2)–(4) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[{label:'Ja', value:'yes'},{label:'Nee', value:'no'}]
+  },
+  {
+    id:'m4_c3', module:'m4', qid:'4.C.3',
+    text:'Maakt de toepassing gebruik van emotieherkenning buiten de werkplek en buiten onderwijsinstellingen (bijv. in retail, horeca, gezondheidszorg of openbare ruimten)?',
+    hint:'',
+    legal:'Art. 50(3) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[{label:'Ja', value:'yes'},{label:'Nee', value:'no'}]
+  },
+  {
+    id:'m4_c4', module:'m4', qid:'4.C.4',
+    text:'Voert de toepassing biometrische categorisering uit waarbij betrokkenen niet op de hoogte zijn van de categorisering?',
+    hint:'',
+    legal:'Art. 50(3) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[{label:'Ja', value:'yes'},{label:'Nee', value:'no'}]
+  },
+  {
+    id:'m4_c5', module:'m4', qid:'4.C.5',
+    text:'Genereert de toepassing tekst over publieke aangelegenheden (nieuws, politiek, overheidsbeleid) die publiek wordt gepubliceerd?',
+    hint:'',
+    legal:'Art. 50(4) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[{label:'Ja', value:'yes'},{label:'Nee', value:'no'}]
+  },
+
+  // ── MODULE 5 — GPAI & Agent ───────────────────────────────────
+  {
+    id:'m5_1_1', module:'m5', qid:'5.1.1',
+    text:'Welke GPAI-modellen van derden worden gebruikt? Vermeld naam, versie, provider en wijze van integratie.',
+    hint:'Vul in voor elk extern GPAI-model dat geïntegreerd is in de toepassing.',
+    legal:'Art. 25, Art. 51–56 EU AI Act',
+    type:'free',
+    skipIf: () => !isInScope() || !notNo('m1_12b'),
+    placeholder:'Bijv. GPT-4o (OpenAI, integratie via API, mei 2024); Claude 3.5 Sonnet (Anthropic, API)...'
+  },
+  {
+    id:'m5_1_2', module:'m5', qid:'5.1.2',
+    text:'Bij fine-tuning of aanpassing van het GPAI-model: heeft uw organisatie erkend dat dit uw eigenaarschap over het modelgedrag vergroot met bijbehorende extra verantwoordelijkheid?',
+    hint:'',
+    legal:'Art. 25 EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || !notNo('m1_12b'),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'Niet van toepassing — geen fine-tuning', value:'na'}
+    ]
+  },
+  {
+    id:'m5_1_3', module:'m5', qid:'5.1.3',
+    text:'Heeft uw organisatie van de GPAI-provider documentatie ontvangen over kenmerken, bekende risico\'s, beperkingen, trainingsdata en vereisten voor menselijk toezicht?',
+    hint:'Standaard API-gebruiksvoorwaarden zijn doorgaans onvoldoende.',
+    legal:'Bijlage XII EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || !notNo('m1_12b'),
+    options:[
+      {label:'Ja, volledig ontvangen', value:'yes'},
+      {label:'Gedeeltelijk', value:'partial'},
+      {label:'Nee — geen of minimale informatie', value:'no'}
+    ]
+  },
+  {
+    id:'m5_1_4', module:'m5', qid:'5.1.4',
+    text:'Bevat de overeenkomst met de GPAI-provider specifieke bepalingen over de verdeling van AI Act-verantwoordelijkheden, incidentmeldingen en informatieverstrekking bij modelwijzigingen?',
+    hint:'',
+    legal:'Art. 25, Art. 53 EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || !notNo('m1_12b'),
+    options:[
+      {label:'Ja, adequaat geregeld', value:'yes'},
+      {label:'Gedeeltelijk', value:'partial'},
+      {label:'Nee — alleen standaard gebruiksvoorwaarden', value:'no'},
+      {label:'Geen schriftelijke overeenkomst', value:'none'}
+    ]
+  },
+  {
+    id:'m5_1_5', module:'m5', qid:'5.1.5',
+    text:'Is geverifieerd of het gebruikte GPAI-model als model met systemisch risico is aangemerkt (10²⁵ FLOP-drempel of aanwijzing door de Europese Commissie)?',
+    hint:'',
+    legal:'Art. 51(1)(a) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || !notNo('m1_12b'),
+    options:[
+      {label:'Ja, geverifieerd — geen systemisch risico', value:'no_risk'},
+      {label:'Ja, geverifieerd — model heeft systemisch risico', value:'has_risk'},
+      {label:'Nee, nog niet geverifieerd', value:'not_checked'}
+    ]
+  },
+  {
+    id:'m5_2_1', module:'m5', qid:'5.2.1',
+    text:'Is een publiek toegankelijke samenvatting van de trainingsdata gepubliceerd?',
+    hint:'',
+    legal:'Art. 53(1)(d) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || !isGPAIModelProvider(),
+    options:[
+      {label:'Ja (inclusief URL)', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'In voorbereiding', value:'planned'}
+    ]
+  },
+  {
+    id:'m5_2_2', module:'m5', qid:'5.2.2',
+    text:'Is er een auteursrechtbeleid voor de trainingsdata, inclusief een opt-outmechanisme voor rechthebbenden?',
+    hint:'',
+    legal:'Art. 53(1)(c) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || !isGPAIModelProvider(),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'In voorbereiding', value:'planned'}
+    ]
+  },
+  {
+    id:'m5_2_3', module:'m5', qid:'5.2.3',
+    text:'Is uw organisatie deelnemer aan de GPAI Code of Practice van het AI Office?',
+    hint:'',
+    legal:'Art. 56 EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || !isGPAIModelProvider(),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'In overweging', value:'considering'}
+    ]
+  },
+  {
+    id:'m5_3_1', module:'m5', qid:'5.3.1',
+    text:'Beschrijf de taken die de AI agent zelfstandig uitvoert, de tools die hij gebruikt en de omgeving waarin hij opereert.',
+    hint:'Noteer ook welk type beslissingen de agent zelfstandig neemt versus welke menselijke goedkeuring vereisen.',
+    legal:'Art. 3(1), Art. 9 EU AI Act',
+    type:'free',
+    skipIf: () => !isInScope() || !isAgent(),
+    placeholder:'Beschrijf de agenttaken, tools (bijv. zoekopdrachten, API-aanroepen, code-executie) en de beslissingsomgeving...'
+  },
+  {
+    id:'m5_3_2', module:'m5', qid:'5.3.2',
+    text:'In welke context opereert de AI agent? Selecteer alle van toepassing.',
+    hint:'',
+    legal:'Art. 3(1), Bijlage III EU AI Act',
+    type:'multi',
+    skipIf: () => !isInScope() || !isAgent(),
+    options:[
+      {label:'Intern bedrijfsproces (workflow-automatisering, dataverwerking)', value:'internal'},
+      {label:'Klantgerichte toepassing (klantenservice, verkoop, advies)', value:'customer'},
+      {label:'Besluitvorming over personen (werving, krediet, zorg, handhaving)', value:'decisions_persons'},
+      {label:'Uitvoering van code of systeemopdrachten met externe impact', value:'code_exec'},
+      {label:'Browsing, informatieverzameling of interactie met derde systemen', value:'browsing'},
+      {label:'Anders', value:'other'}
+    ]
+  },
+  {
+    id:'m5_3_3', module:'m5', qid:'5.3.3',
+    text:'Vereist het systeem menselijke goedkeuring vóórdat de agent een actie definitief uitvoert die impact heeft op personen of externe systemen?',
+    hint:'',
+    legal:'Art. 9(5), Art. 14 EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || !isAgent(),
+    options:[
+      {label:'Ja — volledige goedkeuring vereist voor elke impactvolle actie', value:'full'},
+      {label:'Ja — goedkeuring vereist boven een bepaald risicodrempel', value:'threshold'},
+      {label:'Enkel monitoring achteraf', value:'monitor'},
+      {label:'Geen menselijke tussenkomst ingebouwd', value:'none'}
+    ]
+  },
+  {
+    id:'m5_3_4', module:'m5', qid:'5.3.4',
+    text:'Kan het systeem op elk moment door een bevoegde persoon worden gestopt of onderbroken?',
+    hint:'',
+    legal:'Art. 14(4)(e) EU AI Act',
+    type:'single',
+    skipIf: () => !isInScope() || !isAgent(),
+    options:[
+      {label:'Ja, inclusief geautomatiseerde stop-functie', value:'auto'},
+      {label:'Ja, maar uitsluitend handmatig', value:'manual'},
+      {label:'Nee', value:'no'},
+      {label:'Weet niet', value:'unknown'}
+    ]
+  },
+
+  // ── MODULE 6 ──────────────────────────────────────────────────
+  {
+    id:'m6_1', module:'m6', qid:'6.1',
+    text:'In welke fase bevindt de toepassing zich? Selecteer alle van toepassing.',
+    hint:'',
+    legal:'',
+    type:'multi',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'In ontwikkeling — nog niet in gebruik gesteld', value:'dev'},
+      {label:'In testomgeving of pilot — beperkt gebruik', value:'pilot'},
+      {label:'In productie — intern gebruik', value:'prod_internal'},
+      {label:'In productie — aangeboden aan externe klanten of gebruikers', value:'prod_external'},
+      {label:'Systeem wordt binnenkort substantieel gewijzigd of uitgebreid', value:'change'},
+      {label:'Reeds beoordeeld onder andere regelgeving (bijv. CE-markering, MDR)', value:'other_reg'}
+    ]
+  },
+  {
+    id:'m6_2a', module:'m6', qid:'6.2a',
+    text:'Is uw organisatie eerder in contact geweest met de AI Act of heeft zij stappen gezet voor implementatie?',
+    hint:'',
+    legal:'',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Ja, wij zijn al bezig met AI Act-implementatie', value:'active'},
+      {label:'Ja, bewust maar nog niet begonnen', value:'aware'},
+      {label:'Nee, dit is onze eerste verkenning', value:'first'}
+    ]
+  },
+  {
+    id:'m6_2b', module:'m6', qid:'6.2b',
+    text:'Is er interne of externe juridische advisering ontvangen over de AI Act?',
+    hint:'',
+    legal:'',
+    type:'single',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Ja', value:'yes'},
+      {label:'Nee', value:'no'},
+      {label:'In overweging', value:'considering'}
+    ]
+  },
+  {
+    id:'m6_3', module:'m6', qid:'6.3',
+    text:'Welke van de volgende situaties doet zich voor? Selecteer alle van toepassing.',
+    hint:'Dit zijn zelfgerapporteerde rode vlaggen die onmiddellijke aandacht vereisen.',
+    legal:'',
+    type:'multi',
+    skipIf: () => !isInScope(),
+    options:[
+      {label:'Toepassing is al in productie maar er is nooit een risicobeoordeling uitgevoerd', value:'no_rba'},
+      {label:'Er is geen of nauwelijks technische documentatie beschikbaar', value:'no_docs'},
+      {label:'Contracten met AI-leveranciers bevatten geen bepalingen over de AI Act', value:'no_contracts'},
+      {label:'Beslissingen over personen worden genomen zonder menselijk toezicht', value:'no_oversight'},
+      {label:'De toepassing is gebouwd op een GPAI-model maar er is geen informatie ontvangen over risico\'s', value:'no_gpai_info'},
+      {label:'De toepassing genereert content maar gebruikers worden niet geïnformeerd dat het AI-gegenereerd is', value:'no_disclosure'},
+      {label:'De toepassing valt vermoedelijk in een hoog-risicocategorie maar er is geen conformiteitsverklaring', value:'no_conformity'},
+      {label:'De toepassing verwerkt gevoelige persoonsgegevens maar er is geen DPIA uitgevoerd', value:'no_dpia'},
+      {label:'Geen van bovenstaande', value:'none'}
+    ]
+  }
+];
+</script>
+<script>
+// ═══════════════════════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════════════════════
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+function showIdentification() { showScreen('screen-identification'); }
+
+function startModules() {
+  const org = document.getElementById('id_org').value.trim();
+  const name = document.getElementById('id_name').value.trim();
+  const email = document.getElementById('id_email').value.trim();
+  const app = document.getElementById('id_appname').value.trim();
+  const desc = document.getElementById('id_desc').value.trim();
+  if (!org || !name || !email || !app || !desc || desc.split(/\s+/).length < 30) {
+    document.getElementById('id-error').classList.add('visible');
+    return;
+  }
+  idData = { org, country: document.getElementById('id_country').value.trim(), kvk: document.getElementById('id_kvk').value.trim(), name, role: document.getElementById('id_role').value.trim(), email, appname: app, desc };
+  currentIdx = 0; history = []; answers = {};
+  showScreen('screen-question');
+  renderQ();
+}
+
+// word count for description
+document.addEventListener('DOMContentLoaded', () => {
+  const d = document.getElementById('id_desc');
+  if (d) d.addEventListener('input', () => {
+    const wc = d.value.trim().split(/\s+/).filter(Boolean).length;
+    document.getElementById('id_desc_count').textContent = wc + ' / min. 150 woorden';
+    document.getElementById('id_desc_count').style.color = wc >= 150 ? 'var(--green)' : 'var(--muted)';
+  });
+});
+
+function getVisible() {
+  return questions.filter(q => !q.skipIf || !q.skipIf());
+}
+
+const CRUMBS = ['m1','m2','m3','m4','m5','m6'];
+
+function renderQ() {
+  const vis = getVisible();
+  if (currentIdx >= vis.length) { showEmailScreen(); return; }
+  const q = vis[currentIdx];
+  const pct = (currentIdx / vis.length) * 100;
+  document.getElementById('q-progress').style.width = pct + '%';
+  document.getElementById('q-count').textContent = (currentIdx+1) + ' / ' + vis.length;
+  document.getElementById('q-module-label').textContent = MODULES[q.module] || '';
+  document.getElementById('q-id').textContent = 'Vraag ' + q.qid;
+  document.getElementById('q-text').textContent = q.text;
+
+  const hintEl = document.getElementById('q-hint');
+  if (q.hint) { hintEl.textContent = q.hint; hintEl.style.display = 'block'; }
+  else hintEl.style.display = 'none';
+
+  const legalEl = document.getElementById('q-legal');
+  if (q.legal) { document.getElementById('q-legal-text').textContent = q.legal; legalEl.style.display = 'flex'; }
+  else legalEl.style.display = 'none';
+
+  // breadcrumb
+  const bc = document.getElementById('module-breadcrumb');
+  bc.innerHTML = CRUMBS.map(m => `<span class="crumb${q.module===m?' active':''}">${MODULES[m]||m}</span>`).join('');
+
+  // stop notice
+  document.getElementById('stop-notice').style.display = 'none';
+
+  // render options/free
+  const optWrap = document.getElementById('options-wrap');
+  const freeWrap = document.getElementById('free-wrap');
+  const tableWrap = document.getElementById('table-wrap');
+  const subWrap = document.getElementById('sub-questions-wrap');
+  subWrap.innerHTML = '';
+
+  if (q.type === 'free') {
+    optWrap.style.display = 'none'; freeWrap.style.display = 'block'; tableWrap.style.display = 'none';
+    const ta = document.getElementById('free-input');
+    ta.placeholder = q.placeholder || 'Typ uw antwoord hier...';
+    ta.value = answers[q.id] || '';
+    ta.oninput = () => { updateNext(); };
+    document.getElementById('free-count').textContent = '';
+  } else {
+    optWrap.style.display = 'block'; freeWrap.style.display = 'none'; tableWrap.style.display = 'none';
+    const list = document.getElementById('options-list');
+    list.innerHTML = '';
+    const isMulti = q.type === 'multi';
+    const cur = answers[q.id];
+    q.options.forEach(opt => {
+      const sel = isMulti
+        ? (Array.isArray(cur) ? cur.includes(opt.value) : false)
+        : cur === opt.value;
+      const btn = document.createElement('button');
+      btn.className = 'option-btn' + (isMulti?' checkbox':'') + (sel?' selected':'') + (opt.stop?' stop':'');
+      btn.innerHTML = `<div class="option-indicator"></div><div><div class="option-label">${opt.label}</div>${opt.sub?`<div class="option-sub">${opt.sub}</div>`:''}</div>`;
+      btn.onclick = () => selectOpt(opt, isMulti, q);
+      list.appendChild(btn);
+    });
+  }
+
+  document.getElementById('btn-back').style.visibility = currentIdx === 0 ? 'hidden' : 'visible';
+  updateNext();
+}
+
+function selectOpt(opt, isMulti, q) {
+  if (isMulti) {
+    let sel = Array.isArray(answers[q.id]) ? [...answers[q.id]] : [];
+    if (opt.value === 'none' || opt.value === 'unknown') sel = [opt.value];
+    else {
+      sel = sel.filter(v => v !== 'none' && v !== 'unknown');
+      if (sel.includes(opt.value)) sel = sel.filter(v => v !== opt.value);
+      else sel.push(opt.value);
+    }
+    answers[q.id] = sel;
+    document.querySelectorAll('.option-btn').forEach((b,i) => b.classList.toggle('selected', sel.includes(q.options[i].value)));
+    updateNext();
+  } else {
+    answers[q.id] = opt.value;
+    document.querySelectorAll('.option-btn').forEach((b,i) => {
+      b.classList.toggle('selected', q.options[i].value === opt.value);
+    });
+    updateNext();
+    if (opt.stop) {
+      document.getElementById('stop-title').textContent = opt.stopTitle || 'Let op';
+      document.getElementById('stop-text').textContent = opt.stopText || '';
+      document.getElementById('stop-notice').style.display = 'flex';
+    }
+    if (!opt.stop && q.type === 'single') {
+      setTimeout(() => {
+        const vis = getVisible();
+        if (currentIdx < vis.length - 1) { history.push(currentIdx); currentIdx++; renderQ(); }
+        else showEmailScreen();
+      }, 300);
+    }
+  }
+}
+
+function updateNext() {
+  const vis = getVisible();
+  const q = vis[currentIdx];
+  if (!q) return;
+  const btn = document.getElementById('btn-next');
+  let ok = false;
+  if (q.type === 'free') ok = (document.getElementById('free-input').value||'').trim().length > 10;
+  else if (q.type === 'multi') { const s = answers[q.id]; ok = Array.isArray(s) && s.length > 0; }
+  else ok = !!answers[q.id];
+  btn.classList.toggle('enabled', ok);
+  btn.textContent = currentIdx === vis.length - 1 ? 'Bekijk resultaten →' : 'Volgende →';
+}
+
+function nextQ() {
+  const vis = getVisible();
+  const q = vis[currentIdx];
+  if (!q) return;
+  if (q.type === 'free') {
+    const v = (document.getElementById('free-input').value||'').trim();
+    if (v.length < 10) return;
+    answers[q.id] = v;
+  } else if (q.type === 'multi') {
+    const s = answers[q.id];
+    if (!Array.isArray(s) || s.length === 0) return;
+  } else { if (!answers[q.id]) return; }
+  history.push(currentIdx);
+  if (currentIdx < vis.length - 1) { currentIdx++; renderQ(); }
+  else showEmailScreen();
+}
+
+function prevQ() {
+  if (history.length > 0) { currentIdx = history.pop(); renderQ(); }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// EMAIL GATE
+// ═══════════════════════════════════════════════════════════════
+function showEmailScreen() { showScreen('screen-email'); }
+function clearGateError() {
+  document.getElementById('gate-error').classList.remove('visible');
+  document.getElementById('gate-email').classList.remove('error');
+}
+function submitGate() {
+  const e = document.getElementById('gate-email').value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) {
+    document.getElementById('gate-email').classList.add('error');
+    document.getElementById('gate-error').classList.add('visible');
+    return;
+  }
+  userEmail = e;
+  const btn = document.getElementById('btn-gate-submit');
+  btn.disabled = true; btn.textContent = 'Rapport genereren…';
+  sendEmails(e, buildReportText())
+    .then(() => { btn.textContent = 'Rapport verzonden ✓'; setTimeout(() => { showScreen('screen-results'); renderResults(); }, 700); })
+    .catch(() => { showScreen('screen-results'); renderResults(); });
+}
+
+// Email
+async function sendEmails(toEmail, reportText) {
+  const BG = 'info@bg.legal';
+  const d = new Date().toLocaleDateString('nl-NL',{day:'2-digit',month:'long',year:'numeric'});
+  const fd1 = new FormData();
+  fd1.append('_to', toEmail); fd1.append('_replyto', BG);
+  fd1.append('_subject', 'EU AI Act Assessment Rapport — ' + idData.appname);
+  fd1.append('_template', 'box');
+  fd1.append('Naam', idData.name); fd1.append('Organisatie', idData.org);
+  fd1.append('Toepassing', idData.appname); fd1.append('Datum', d);
+  fd1.append('Volledig rapport', reportText);
+  const fd2 = new FormData();
+  fd2.append('_to', BG); fd2.append('_replyto', toEmail);
+  fd2.append('_subject', 'AI Act Assessment — ' + idData.name + ' (' + idData.org + ')');
+  fd2.append('_template', 'box');
+  fd2.append('Naam', idData.name); fd2.append('Organisatie', idData.org);
+  fd2.append('E-mail', toEmail); fd2.append('Toepassing', idData.appname); fd2.append('Datum', d);
+  fd2.append('Volledig rapport', reportText);
+  return Promise.allSettled([
+    fetch('https://formsubmit.co/'+toEmail, {method:'POST',body:fd1,headers:{Accept:'application/json'}}),
+    fetch('https://formsubmit.co/'+BG, {method:'POST',body:fd2,headers:{Accept:'application/json'}})
+  ]);
+}
+
+// Report text
+function buildReportText() {
+  const d = new Date().toLocaleDateString('nl-NL',{day:'2-digit',month:'long',year:'numeric'});
+  const lines = ['=== EU AI ACT APPLICABILITY ASSESSMENT RAPPORT ===','',
+    'Organisatie:  '+idData.org, 'Toepassing:   '+idData.appname,
+    'Invuller:     '+idData.name+(idData.role?' ('+idData.role+')':''),
+    'E-mail:       '+userEmail, 'Datum:        '+d,'',
+    '--- BESCHRIJVING TOEPASSING ---', idData.desc, ''];
+  // Part II
+  lines.push('--- DEEL II: KWALIFICATIEOORDEEL ---');
+  lines.push('Kwalificeert als AI-systeem: ' + (isAISystem() ? 'Ja' : 'Nee / Grensgeval'));
+  lines.push('Territoriaal in scope: ' + (isInScope() ? 'Ja' : 'Nee'));
+  lines.push('');
+  // Part III
+  lines.push('--- DEEL III: ROLLENMATRIX ---');
+  if (isProvider()) lines.push('Rol: Provider (art. 16-25 EU AI Act)');
+  if (isDeployer()) lines.push('Rol: Deployer/Gebruiker (art. 26 EU AI Act)');
+  if (isImporter()) lines.push('Rol: Importeur (art. 23 EU AI Act)');
+  if (isDistributor()) lines.push('Rol: Distributeur (art. 24 EU AI Act)');
+  if (isGPAIModelProvider()) lines.push('Rol: GPAI-model provider (art. 53-55 EU AI Act)');
+  lines.push('');
+  // Part IV
+  lines.push('--- DEEL IV: VERBODSBEOORDELING ---');
+  computeForbiddenFlags().forEach((f,i) => {
+    lines.push((i+1)+'. ['+f.level.toUpperCase()+'] '+f.name);
+    lines.push('   '+f.desc);
+    if (f.legal) lines.push('   Grondslag: '+f.legal);
+  });
+  lines.push('');
+  // Part V
+  lines.push('--- DEEL V: RISICOCLASSIFICATIE ---');
+  lines.push('Classificatie: '+computeRiskClass());
+  lines.push('');
+  // Part VII
+  lines.push('--- DEEL VII: RODE VLAGGEN ---');
+  computeAllFlags().forEach((f,i) => {
+    lines.push((i+1)+'. ['+f.level.toUpperCase()+'] '+f.name);
+    lines.push('   '+f.desc);
+    if (f.action) lines.push('   Aanbeveling: '+f.action);
+  });
+  lines.push('');
+  // Answers
+  lines.push('--- ANTWOORDEN ---');
+  getVisible().forEach(q => {
+    const ans = answers[q.id];
+    let aStr = '-- niet beantwoord';
+    if (ans !== undefined && ans !== null && ans !== '') {
+      if (Array.isArray(ans)) aStr = ans.map(v=>{const o=q.options?q.options.find(o=>o.value===v):null;return o?o.label:v;}).join(' | ');
+      else if (q.options){const o=q.options.find(o=>o.value===ans);aStr=o?o.label:ans;}
+      else aStr = ans;
+    }
+    lines.push('['+(q.qid||q.id)+'] '+q.text.substring(0,80)+'...');
+    lines.push('   A: '+aStr);
+  });
+  lines.push('','bg.legal | info@bg.legal');
+  return lines.join('\n');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// COMPUTATION HELPERS
+// ═══════════════════════════════════════════════════════════════
+function computeRiskClass() {
+  if (!isAISystem()) return 'Niet van toepassing — geen AI-systeem';
+  if (!isInScope()) return 'Niet van toepassing — buiten territoriale scope';
+  if (hasForbiddenFlag()) return 'MOGELIJK VERBODEN TOEPASSING';
+  if (isHighRisk()) return 'Hoog risico';
+  const transp = isYes('m4_c1')||isYes('m4_c2')||isYes('m4_c3')||isYes('m4_c4')||isYes('m4_c5');
+  if (transp) return 'Beperkt risico — transparantieverplichtingen (art. 50)';
+  return 'Minimaal risico';
+}
+
+function computeForbiddenFlags() {
+  const flags = [];
+  const manip = (!has('m3_a1','none')&&!has('m3_a2','none'))||(!has('m3_a1','none')&&!has('m3_a3','none'));
+  if (manip && isYes('m3_a4') && isYes('m3_a5') && !isYes('m3_a6')) {
+    flags.push({level:'critical',name:'Art. 5(1)(a) — Schadelijke manipulatie of misleiding',desc:'De toepassing maakt gebruik van subliminale, manipulatieve of misleidende technieken die het gedrag wezenlijk vertekenen en aanzienlijke schade veroorzaken of dreigen te veroorzaken.',legal:'Art. 5(1)(a) EU AI Act',action:'Onmiddellijk juridisch advies. Systeemingebruikstelling of -aanbieding opschorten.'});
+  }
+  if (isYes('m3_b2') && isYes('m3_b3')) {
+    flags.push({level:'critical',name:'Art. 5(1)(b) — Uitbuiting van kwetsbare personen',desc:'De toepassing buit actief kwetsbaarheden uit van bijzonder kwetsbare groepen met aanzienlijke schade als gevolg of te verwachten gevolg.',legal:'Art. 5(1)(b) EU AI Act',action:'Onmiddellijk juridisch advies. Systeem mag niet worden ingezet.'});
+  }
+  if (isYes('m3_c1') && (isYes('m3_c2')||isYes('m3_c3')) && !isYes('m3_c4')) {
+    flags.push({level:'critical',name:'Art. 5(1)(c) — Verboden sociale scoring',desc:'De toepassing evalueert personen op sociaal gedrag en leidt tot nadelige of onevenredige behandeling buiten de legitieme context.',legal:'Art. 5(1)(c) EU AI Act',action:'Onmiddellijk juridisch advies. Toepassing mag niet worden ingezet.'});
+  }
+  if (isYes('m3_d1') && answers['m3_d2']==='profiling' && !isYes('m3_d3') && !isYes('m3_d4')) {
+    flags.push({level:'critical',name:'Art. 5(1)(d) — Misdaadvoorspelling op basis van profiel',desc:'De toepassing voorspelt individuele criminaliteit uitsluitend op basis van profilering, zonder objectieve criminele feiten en zonder individuele uitzondering.',legal:'Art. 5(1)(d) EU AI Act',action:'Onmiddellijk juridisch advies. Systeem valt vermoedelijk onder absoluut verbod.'});
+  }
+  if (isYes('m3_e1') && isYes('m3_e2') && isYes('m3_e3') && !isYes('m3_e4')) {
+    flags.push({level:'critical',name:'Art. 5(1)(e) — Ongericht scrapen van gezichtsafbeeldingen',desc:'De toepassing schraapt ongericht gezichtsafbeeldingen voor een gezichtsherkenningsdatabase.',legal:'Art. 5(1)(e) EU AI Act',action:'Onmiddellijk juridisch advies. Systeem mag niet worden ingezet.'});
+  }
+  if (isYes('m3_f1') && isYes('m3_f2') && !isYes('m3_f3')) {
+    flags.push({level:'critical',name:'Art. 5(1)(f) — Emotieherkenning op werkplek of in onderwijs',desc:'De toepassing detecteert emoties via biometrie op de werkplek of in onderwijsinstellingen zonder CE-gemarkeerde medische of veiligheidsuitzonderingsgrond.',legal:'Art. 5(1)(f) EU AI Act',action:'Onmiddellijk juridisch advies. Aanpassen of stopzetten.'});
+  }
+  if (isYes('m3_g1') && isYes('m3_g2') && !isYes('m3_g3') && !isYes('m3_g4')) {
+    flags.push({level:'critical',name:'Art. 5(1)(g) — Biometrische categorisering op gevoelige kenmerken',desc:'De toepassing categoriseert personen op basis van biometrie om gevoelige kenmerken (ras, religie, seksuele oriëntatie, etc.) af te leiden.',legal:'Art. 5(1)(g) EU AI Act',action:'Onmiddellijk juridisch advies. Systeem valt onder absoluut verbod.'});
+  }
+  if (isYes('m3_h1') && isYes('m3_h2') && answers['m3_h3'] && (answers['m3_h3'].includes('none') || answers['m3_h3'].length===0)) {
+    flags.push({level:'critical',name:'Art. 5(1)(h) — Verboden realtime biometrische identificatie',desc:'De toepassing gebruikt realtime biometrische identificatie in openbare ruimten voor wetshandhaving zonder toepasbare wettelijke uitzondering.',legal:'Art. 5(1)(h) EU AI Act',action:'Gebruik onmiddellijk stopzetten. Juridisch advies vereist.'});
+  }
+  if (answers['m3_i']==='borderline') {
+    flags.push({level:'high',name:'Grensgeval — mogelijke verboden praktijk (art. 5)',desc:'De invuller heeft aangeduid dat er twijfel bestaat over de verbodsbeoordeling. Nader juridisch onderzoek is vereist vóór ingebruikstelling.',legal:'Art. 5 EU AI Act',action:'Juridisch advies inwinnen vóór ingebruikstelling.'});
+  }
+  return flags;
+}
+
+function computeAllFlags() {
+  const flags = [...computeForbiddenFlags()];
+  const a = answers;
+
+  if (isAISystem() && !isInScope()) {
+    flags.push({level:'info',name:'Buiten territoriale scope AI Act',desc:'De toepassing valt buiten de territoriale werkingssfeer van de AI Act. Andere regelgeving (bijv. lokale AI-regelgeving) kan van toepassing zijn.',legal:'Art. 2 EU AI Act',action:'Monitor territoriale reikwijdte bij uitbreiding.'});
+    return flags;
+  }
+  if (!isAISystem()) {
+    flags.push({level:'info',name:'Geen AI-systeem vastgesteld',desc:'De toepassing kwalificeert op basis van de verstrekte antwoorden niet als AI-systeem in de zin van art. 3(1) EU AI Act. Documenteer de redenering.',legal:'Art. 3(1) EU AI Act',action:'Leg de redenering schriftelijk vast voor auditdoeleinden.'});
+    return flags;
+  }
+
+  // High risk flags
+  if (isHighRisk()) {
+    if (isProvider()) {
+      if (!answers['m2_2a'] || answers['m2_2a']==='no') {
+        flags.push({level:'critical',name:'Hoog-risico AI-systeem zonder conformiteitsbeoordelingsprocedure',desc:'Als provider van een hoog-risicosysteem bent u verplicht een conformiteitsbeoordelingsprocedure te doorlopen vóór marktintroductie.',legal:'Art. 43 EU AI Act',action:'Start conformiteitsbeoordelingsprocedure. Bij MDR/IVDR: notified body vereist.'});
+      }
+    }
+    if (isProvider() || isYes('m2_2b')) {
+      flags.push({level:'high',name:'Hoog-risico AI — kwaliteitsbeheersysteem, documentatie en registratie verplicht',desc:'Voor hoog-risico AI-systemen zijn verplicht: kwaliteitsbeheersysteem (art. 17), technische documentatie (art. 11 + Bijlage IV), automatische logging (art. 12), transparantie (art. 13), conformiteitsbeoordeling (art. 43) en EU-databankregistratie (art. 49).',legal:'Art. 9-17, 43, 49 EU AI Act',action:'Stel een implementatieroadmap op voor alle provider-verplichtingen.'});
+    }
+    if (isDeployer()) {
+      flags.push({level:'high',name:'Hoog-risico AI — deployer-verplichtingen van toepassing',desc:'Als deployer van een hoog-risicosysteem bent u verplicht: menselijk toezicht inrichten (art. 26), documentatie controleren, logging bewaren en incidenten melden.',legal:'Art. 26 EU AI Act',action:'Implementeer menselijk toezicht en documenteer dit aantoonbaar.'});
+      if (isYes('m2_3_3')) {
+        flags.push({level:'high',name:'Fundamental Rights Impact Assessment (FRIA) vereist',desc:'Als publieke instantie of vergelijkbare private organisatie bent u verplicht een FRIA uit te voeren vóór ingebruikstelling van een hoog-risicosysteem.',legal:'Art. 27 EU AI Act',action:'Voer een FRIA uit en publiceer de uitkomsten.'});
+      }
+    }
+  }
+
+  // Role flags
+  if (!isProvider() && !isDeployer() && !isImporter() && !isDistributor() && !isGPAIModelProvider() && isInScope()) {
+    flags.push({level:'medium',name:'Rol niet eenduidig bepaald',desc:'Op basis van de antwoorden is de rol in de AI-waardeketen niet eenduidig vastgesteld. Preciseer de rolbepaling voor een accurate verplichtingenmatrix.',legal:'Art. 3(3)–(8), Art. 22–27 EU AI Act',action:'Herzie de rolbepaling met juridische begeleiding.'});
+  }
+  if (answers['m2_6c']==='no') {
+    flags.push({level:'high',name:'Contractuele verdeling AI Act-verplichtingen ontbreekt',desc:'Er is geen contractuele verdeling vastgelegd van de AI Act-verplichtingen tussen de betrokken partijen. Dit leidt tot aansprakelijkheidsrisico\'s.',legal:'Art. 22–27 EU AI Act',action:'Stel AI Act-addenda op in contracten met AI-leveranciers en klanten.'});
+  }
+
+  // Transparency
+  if (isYes('m4_c1')) flags.push({level:'medium',name:'Transparantieverplichting chatbot (art. 50 lid 1)',desc:'Gebruikers moeten actief worden geïnformeerd dat zij met een AI-systeem communiceren.',legal:'Art. 50(1) EU AI Act',action:'Implementeer een duidelijke disclosure-mededeling in de gebruikersinterface.'});
+  if (isYes('m4_c2')) flags.push({level:'medium',name:'Transparantieverplichting synthetische media (art. 50 lid 2)',desc:'AI-gegenereerde content die als echt kan worden beschouwd moet als zodanig worden gemarkeerd.',legal:'Art. 50(2) EU AI Act',action:'Implementeer AI-labeling voor synthetische media.'});
+  if (isYes('m4_c3')||isYes('m4_c4')) flags.push({level:'medium',name:'Transparantieverplichting emotieherkenning/biometrische categorisering (art. 50 lid 3)',desc:'Personen moeten worden geïnformeerd over emotieherkenning of biometrische categorisering.',legal:'Art. 50(3) EU AI Act',action:'Informeer betrokkenen actief en documenteer deze informatieverstrekking.'});
+
+  // GPAI flags
+  if (notNo('m1_12b')) {
+    if (answers['m5_1_3']==='no') flags.push({level:'high',name:'Geen adequate GPAI-documentatie ontvangen van provider',desc:'Standaard API-voorwaarden zijn onvoldoende. De GPAI-provider dient documentatie te verstrekken over kenmerken, risico\'s en beperkingen conform Bijlage XII EU AI Act.',legal:'Art. 25, Bijlage XII EU AI Act',action:'Vraag adequate model-documentatie op bij de GPAI-provider.'});
+    if (answers['m5_1_4']==='no'||answers['m5_1_4']==='none') flags.push({level:'high',name:'Geen contractuele AI Act-bepalingen met GPAI-provider',desc:'Contracten met GPAI-providers dienen specifieke AI Act-verplichtingen, incidentmeldingen en informatiestromen te bevatten.',legal:'Art. 25 EU AI Act',action:'Onderhandel AI Act-addenda in overeenkomst met GPAI-provider.'});
+    if (answers['m5_1_5']==='has_risk') flags.push({level:'critical',name:'GPAI-model met systemisch risico — aanvullende verplichtingen',desc:'Het gebruikte GPAI-model is aangemerkt als model met systemisch risico. Aanvullende verplichtingen zijn van toepassing voor de GPAI-provider.',legal:'Art. 51, 55 EU AI Act',action:'Verifieer naleving van systemisch-risicoverplichtingen door de GPAI-provider en documenteer dit.'});
+  }
+  if (isGPAIModelProvider()) {
+    if (answers['m5_2_1']==='no') flags.push({level:'high',name:'Geen publieke trainingsdata-samenvatting gepubliceerd (GPAI-provider)',desc:'GPAI-model providers zijn verplicht een publiek toegankelijke samenvatting van de trainingsdata te publiceren.',legal:'Art. 53(1)(d) EU AI Act',action:'Publiceer een samenvatting van de trainingsdata.'});
+    if (answers['m5_2_2']==='no') flags.push({level:'high',name:'Geen auteursrechtbeleid voor trainingsdata',desc:'GPAI-model providers zijn verplicht een auteursrechtbeleid te hebben met een opt-outmechanisme voor rechthebbenden.',legal:'Art. 53(1)(c) EU AI Act',action:'Stel een auteursrechtbeleid op en implementeer een opt-outmechanisme.'});
+    if (answers['m2_5_2']==='above') flags.push({level:'critical',name:'GPAI-model boven 10²⁵ FLOP — systemisch risico verplichtingen',desc:'Modellen boven de 10²⁵ FLOP-drempel zijn onderworpen aan aanvullende verplichtingen: modelevaluatie, adversarial testing, incidentmeldplicht aan het AI Office, cyberbeveiliging en energie-efficiëntierapportage.',legal:'Art. 51, 55 EU AI Act',action:'Start compliance-traject voor systemisch-risicoverplichtingen. AI Office informeren.'});
+  }
+
+  // Agent flags
+  if (isAgent()) {
+    if (answers['m5_3_3']==='none') flags.push({level:'high',name:'AI agent zonder menselijk toezicht',desc:'De AI agent voert zelfstandig acties uit met impact op personen of systemen zonder enige menselijke tussenkomst. Dit verhoogt het risico aanzienlijk en kan leiden tot hoog-risicocategorisering.',legal:'Art. 14 EU AI Act',action:'Implementeer human-in-the-loop controlemechanismen voor impactvolle beslissingen.'});
+    if (answers['m5_3_4']==='no') flags.push({level:'high',name:'AI agent kan niet worden gestopt',desc:'Het systeem beschikt niet over een stop- of onderbrekingsfunctie. Dit is een vereiste voor hoog-risico AI-systemen en sterk aanbevolen voor alle AI agents.',legal:'Art. 14(4)(e) EU AI Act',action:'Implementeer een geautomatiseerde stop-functie.'});
+  }
+
+  // Self-reported flags
+  if (answers['m6_3'] && Array.isArray(answers['m6_3'])) {
+    const flagMap = {
+      no_rba: {name:'Toepassing in productie zonder risicobeoordeling', desc:'Een risicobeheersysteem is een basisvereiste voor hoog-risico AI-systemen.', action:'Voer alsnog een risicobeoordeling uit conform art. 9 AI Act.'},
+      no_docs: {name:'Geen technische documentatie aanwezig', desc:'Technische documentatie is verplicht voor hoog-risico AI-systemen en een best practice voor alle AI.', action:'Stel technische documentatie op conform Bijlage IV AI Act.'},
+      no_contracts: {name:'Geen AI Act-bepalingen in contracten', desc:'Contractuele AI Act-bepalingen zijn noodzakelijk voor een correcte verantwoordelijkheidsverdeling.', action:'Stel AI Act-addenda op voor alle relevante contracten.'},
+      no_oversight: {name:'Beslissingen over personen zonder menselijk toezicht', desc:'Geautomatiseerde besluiten over personen zonder menselijk toezicht zijn een hoog-risicosignaal.', action:'Implementeer menselijk toezicht conform art. 14 en 26 AI Act.'},
+      no_gpai_info: {name:'Geen risicoinfo ontvangen van GPAI-model provider', desc:'De GPAI-provider dient informatie te verstrekken over risico\'s en beperkingen.', action:'Vraag Bijlage XII-documentatie op bij de GPAI-provider.'},
+      no_disclosure: {name:'Geen AI-disclosure naar gebruikers', desc:'Gebruikers moeten weten dat zij met AI interacteren of AI-gegenereerde content zien.', action:'Implementeer transparantiemaatregel conform art. 50 AI Act.'},
+      no_conformity: {name:'Hoog-risico toepassing zonder conformiteitsverklaring', desc:'Marktintroductie of ingebruikstelling zonder conformiteitsbeoordeling is een directe schending.', action:'Start conformiteitsbeoordelingsprocedure conform art. 43 AI Act.'},
+      no_dpia: {name:'Gevoelige persoonsgegevens zonder DPIA (AVG)', desc:'Een DPIA is verplicht bij verwerking van bijzondere persoonsgegevens of geautomatiseerde beslissingen met rechtsgevolgen.', action:'Voer een DPIA uit conform art. 35 AVG vóór verdere ingebruikstelling.'}
+    };
+    answers['m6_3'].filter(v=>v!=='none').forEach(v => {
+      if (flagMap[v]) flags.push({level:'high', name:flagMap[v].name, desc:flagMap[v].desc, action:flagMap[v].action, legal:''});
+    });
+  }
+
+  if (flags.length === 0) {
+    flags.push({level:'info', name:'Geen directe compliance-blokkades geïdentificeerd', desc:'Op basis van de verstrekte antwoorden zijn er geen directe compliance-blokkades vastgesteld. Aanbeveling: documenteer de compliance-redenering en hertoets periodiek.', action:'Documenteer de compliance-redenering en hanteer de AI Assessment Cycle.', legal:''});
+  }
+  return flags;
+}
+
+function computeDocChecklist() {
+  const docs = [];
+  if (isHighRisk() && isProvider()) {
+    docs.push('Kwaliteitsbeheersysteem (QMS) conform art. 17 AI Act');
+    docs.push('Technische documentatie conform Bijlage IV AI Act');
+    docs.push('Audit trail / automatische logging conform art. 12 AI Act');
+    docs.push('Gebruikersinstructies en transparantie-informatie conform art. 13 AI Act');
+    docs.push('Conformiteitsbeoordelingsrapport conform art. 43 AI Act');
+    docs.push('EU-verklaring van conformiteit conform art. 47 AI Act');
+    docs.push('Registratie in EU-databank conform art. 49 AI Act');
+    docs.push('Post-market monitoringplan conform art. 72 AI Act');
+    docs.push('Risicobeheersysteemdocumentatie conform art. 9 AI Act');
+  }
+  if (isHighRisk() && isDeployer()) {
+    docs.push('Verificatie van technische documentatie en conformiteitsverklaring van de provider');
+    docs.push('Gedocumenteerde menselijk-toezichtsprocedure conform art. 26 AI Act');
+    docs.push('Logging-bewaringsprocedure conform art. 26(6) AI Act');
+    docs.push('Incidentmeldingsprocedure conform art. 26(5) AI Act');
+    if (isYes('m2_3_3')) docs.push('Fundamental Rights Impact Assessment (FRIA) conform art. 27 AI Act');
+  }
+  if (notNo('m1_12b')) {
+    docs.push('GPAI-model documentatie conform Bijlage XII AI Act');
+    docs.push('AI Act-addendum in overeenkomst met GPAI-provider (art. 25 AI Act)');
+  }
+  if (isGPAIModelProvider()) {
+    docs.push('Technische documentatie GPAI-model conform Bijlage XI AI Act');
+    docs.push('Publieke trainingsdata-samenvatting conform art. 53(1)(d) AI Act');
+    docs.push('Auteursrechtbeleid met opt-outmechanisme conform art. 53(1)(c) AI Act');
+  }
+  if (isYes('m4_c1')||isYes('m4_c2')||isYes('m4_c3')||isYes('m4_c4')) {
+    docs.push('Transparantiedisclosure implementatie conform art. 50 AI Act');
+  }
+  if (isInScope()) {
+    docs.push('AI-register / inventarisatie van alle AI-systemen binnen de organisatie');
+    docs.push('Intern AI Act-beleid en governance-framework');
+  }
+  return docs;
+}
+</script>
+<script>
+// ═══════════════════════════════════════════════════════════════
+// RESULTS RENDERING
+// ═══════════════════════════════════════════════════════════════
+function renderResults() {
+  const d = new Date().toLocaleDateString('nl-NL',{day:'2-digit',month:'long',year:'numeric'});
+  document.getElementById('results-meta').textContent = idData.name + (idData.org ? ' · '+idData.org : '') + ' · ' + d;
+
+  const allFlags = computeAllFlags();
+  const hasBlocker = allFlags.some(f=>f.level==='critical');
+  const hasHigh = allFlags.some(f=>f.level==='high');
+  const v = document.getElementById('overall-verdict');
+  if (hasForbiddenFlag()) { v.className='overall-verdict critical'; v.textContent='🔴 Mogelijk verboden toepassing — directe actie vereist'; }
+  else if (hasBlocker) { v.className='overall-verdict critical'; v.textContent='🔴 Kritiek — directe actie vereist'; }
+  else if (isHighRisk()) { v.className='overall-verdict high'; v.textContent='🟠 Hoog risico — aanzienlijke verplichtingen'; }
+  else if (hasHigh) { v.className='overall-verdict high'; v.textContent='🟡 Actie vereist voor go-live'; }
+  else if (!isAISystem()||!isInScope()) { v.className='overall-verdict low'; v.textContent='🟢 Buiten scope — geen AI Act-verplichtingen'; }
+  else { v.className='overall-verdict low'; v.textContent='🟢 Minimaal risico — documenteer en monitor'; }
+
+  // Part II — Kwalificatie
+  const p2 = document.getElementById('part2-grid');
+  p2.innerHTML = '';
+  [
+    {label:'Kwalificeert als AI-systeem', value: isAISystem()?'Ja':'Nee / grensgeval', cls: isAISystem()?'accent':''},
+    {label:'Territoriale scope', value: isInScope()?'In scope':'Buiten scope', cls: isInScope()?'accent':''},
+    {label:'Uitsluitingen van toepassing', value: (has('m1_11','military')||has('m1_11','rnd')||has('m1_11','personal')||has('m1_11','opensource'))?'Ja — zie rapport':'Nee', cls:''},
+    {label:'Inferentievermogen', value: answers['m1_3']||'—', cls:''},
+    {label:'Aanpassingsvermogen na uitrol', value: isYes('m1_9')?'Ja':'Nee/Niet van toepassing', cls:''},
+    {label:'AI Agent', value: isAgent()?'Ja':'Nee', cls: isAgent()?'amber':''},
+    {label:'GPAI-component', value: hasGPAI()?'Ja':'Nee', cls: hasGPAI()?'amber':''},
+    {label:'GPAI-model provider', value: isGPAIModelProvider()?'Ja':'Nee', cls: isGPAIModelProvider()?'amber':''},
+  ].forEach(c => {
+    const el = document.createElement('div');
+    el.className = 'verdict-card';
+    el.innerHTML = `<div class="verdict-card-label">${c.label}</div><div class="verdict-card-value ${c.cls||''}">${c.value}</div>`;
+    p2.appendChild(el);
+  });
+
+  // Part III — Roles
+  const p3 = document.getElementById('part3-roles');
+  p3.innerHTML = '';
+  const roles = [
+    {name:'Provider', active: isProvider(), obls:'Art. 9-17, 43, 47, 48, 49, 72 EU AI Act — kwaliteitsbeheersysteem, technische documentatie, logging, transparantie, conformiteitsbeoordeling, EU-databankregistratie, post-market monitoring.'},
+    {name:'Deployer / Gebruiker', active: isDeployer(), obls:'Art. 26 EU AI Act — menselijk toezicht, documentatieverificatie, logging bewaren, incidentmelding, FRIA (indien publieke instantie).'},
+    {name:'Importeur', active: isImporter(), obls:'Art. 23 EU AI Act — verificeren dat provider aan AI Act voldoet, informatieplichten, registratie.'},
+    {name:'Distributeur', active: isDistributor(), obls:'Art. 24 EU AI Act — verificeren van conformiteit, doorgeven van informatie, melden van risico\'s.'},
+    {name:'GPAI-model provider', active: isGPAIModelProvider(), obls:'Art. 53-55 EU AI Act — technische documentatie, trainingsdata-transparantie, auteursrechtbeleid. Bij systemisch risico: aanvullende verplichtingen.'},
+  ];
+  roles.forEach(r => {
+    const el = document.createElement('div');
+    el.className = 'role-card';
+    el.innerHTML = `<div class="role-card-name">${r.name} <span class="role-pill ${r.active?'active':'inactive'}">${r.active?'Van toepassing':'Niet van toepassing'}</span></div><div class="role-card-obligations" style="color:${r.active?'var(--ink)':'var(--muted)'}">${r.active?r.obls:'—'}</div>`;
+    p3.appendChild(el);
+  });
+
+  // Part IV — Forbidden
+  const p4 = document.getElementById('part4-list');
+  p4.innerHTML = '';
+  const forbids = computeForbiddenFlags();
+  if (forbids.length === 0) {
+    p4.innerHTML = '<div class="flag-card"><div class="flag-icon info">🟢</div><div class="flag-body"><div class="flag-level info">Bevestigd</div><div class="flag-name">Geen verboden praktijken vastgesteld</div><div class="flag-desc">Op basis van de antwoorden zijn geen verboden praktijken van art. 5 EU AI Act geïdentificeerd. Documenteer de verbodsbeoordeling voor auditdoeleinden.</div></div></div>';
+  } else {
+    forbids.forEach(f => renderFlag(p4, f));
+  }
+
+  // Part V — Risk class
+  const p5 = document.getElementById('part5-grid');
+  p5.innerHTML = '';
+  const rc = computeRiskClass();
+  const rcCls = rc.includes('VERBODEN')?'red':rc.includes('Hoog')?'red':rc.includes('Beperkt')?'amber':'green';
+  [
+    {label:'Risicoclassificatie', value: rc, cls: rcCls},
+    {label:'Bijlage I — Sectorale productregelgeving', value: hasHighRiskBijlageI()?'Van toepassing':'Niet van toepassing', cls: hasHighRiskBijlageI()?'red':'green'},
+    {label:'Bijlage III — Specifieke categorieën', value: hasHighRiskBijlageIII()?'Categorie(ën) geïdentificeerd':'Geen hoog-risico categorie', cls: hasHighRiskBijlageIII()?'red':'green'},
+    {label:'Art. 6(3) uitzondering', value: answers['m4_b2']==='yes'?'Ingeroepen — documenteer':'Niet van toepassing / ingeroepen', cls: answers['m4_b2']==='yes'?'amber':''},
+    {label:'Transparantieverplichtingen (art. 50)', value: (isYes('m4_c1')||isYes('m4_c2')||isYes('m4_c3')||isYes('m4_c4')||isYes('m4_c5'))?'Van toepassing':'Niet vastgesteld', cls: (isYes('m4_c1')||isYes('m4_c2')||isYes('m4_c3')||isYes('m4_c4')||isYes('m4_c5'))?'amber':''},
+  ].forEach(c => {
+    const el = document.createElement('div');
+    el.className = 'verdict-card';
+    el.innerHTML = `<div class="verdict-card-label">${c.label}</div><div class="verdict-card-value ${c.cls||''}">${c.value}</div>`;
+    p5.appendChild(el);
+  });
+
+  // Part VI — GPAI & Agent
+  const p6 = document.getElementById('part6-content');
+  p6.innerHTML = '';
+  if (!hasGPAI() && !isAgent() && !isGPAIModelProvider()) {
+    p6.innerHTML = '<p style="font-size:0.88rem;color:var(--muted)">Niet van toepassing voor deze toepassing.</p>';
+    document.getElementById('part6-section').style.display = 'none';
+  } else {
+    document.getElementById('part6-section').style.display = 'block';
+    if (notNo('m1_12b')) {
+      p6.innerHTML += `<div class="flag-card medium" style="margin-bottom:10px"><div class="flag-icon info">🔗</div><div class="flag-body"><div class="flag-level medium">GPAI Gebruiker</div><div class="flag-name">GPAI-component van derde partij geïntegreerd</div><div class="flag-desc">Documentatie ontvangen: ${answers['m5_1_3']||'—'} · Contractuele AI Act-bepalingen: ${answers['m5_1_4']||'—'} · Systemisch risico geverifieerd: ${answers['m5_1_5']||'—'}</div></div></div>`;
+    }
+    if (isGPAIModelProvider()) {
+      p6.innerHTML += `<div class="flag-card medium" style="margin-bottom:10px"><div class="flag-icon info">🤖</div><div class="flag-body"><div class="flag-level medium">GPAI Provider</div><div class="flag-name">Organisatie is GPAI-model provider</div><div class="flag-desc">Trainingsdata-samenvatting gepubliceerd: ${answers['m5_2_1']||'—'} · Auteursrechtbeleid: ${answers['m5_2_2']||'—'} · Code of Practice deelnemer: ${answers['m5_2_3']||'—'} · Rekenkracht drempel: ${answers['m2_5_2']||'—'}</div></div></div>`;
+    }
+    if (isAgent()) {
+      p6.innerHTML += `<div class="flag-card medium" style="margin-bottom:10px"><div class="flag-icon info">⚡</div><div class="flag-body"><div class="flag-level medium">AI Agent</div><div class="flag-name">AI Agent geïdentificeerd</div><div class="flag-desc">Menselijk toezicht: ${answers['m5_3_3']||'—'} · Stop-functie: ${answers['m5_3_4']||'—'}</div></div></div>`;
+    }
+  }
+
+  // Part VII — All flags
+  const p7 = document.getElementById('part7-list');
+  p7.innerHTML = '';
+  allFlags.forEach(f => renderFlag(p7, f));
+
+  // Part VIII — Docs
+  const p8 = document.getElementById('part8-content');
+  const docs = computeDocChecklist();
+  if (docs.length === 0) {
+    p8.innerHTML = '<p style="font-size:0.88rem;color:var(--muted)">Op basis van de vastgestelde classificatie zijn er geen specifieke documentatieverplichtingen geïdentificeerd.</p>';
+  } else {
+    p8.innerHTML = '<div style="background:var(--white);border:1.5px solid var(--border);border-radius:8px;padding:20px 24px"><ul style="list-style:none;display:flex;flex-direction:column;gap:10px">' +
+      docs.map(d => `<li style="display:flex;gap:10px;align-items:flex-start;font-size:0.88rem"><span style="color:var(--accent-dark);flex-shrink:0">☐</span><span>${d}</span></li>`).join('') +
+      '</ul></div>';
+  }
+
+  // Answers table
+  const tb = document.getElementById('answers-tbody');
+  tb.innerHTML = '';
+  let lastMod = '';
+  getVisible().forEach(q => {
+    if (q.module !== lastMod) {
+      const hr = document.createElement('tr');
+      hr.innerHTML = `<td colspan="3" style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent-dark);background:var(--accent-light);padding:7px 12px;border-bottom:1px solid rgba(133,133,204,0.2)">${MODULES[q.module]||q.module}</td>`;
+      tb.appendChild(hr);
+      lastMod = q.module;
+    }
+    const ans = answers[q.id];
+    let aStr = '<span class="answer-badge-skip">Niet beantwoord</span>';
+    if (ans !== undefined && ans !== null && ans !== '') {
+      if (Array.isArray(ans)) aStr = ans.map(v=>{const o=q.options?q.options.find(o=>o.value===v):null;return o?o.label:v;}).join(' · ');
+      else if (q.options){const o=q.options.find(o=>o.value===ans);aStr=o?o.label:ans;}
+      else aStr = '<span style="font-style:italic;color:var(--muted)">'+ans+'</span>';
+    }
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td style="color:var(--accent-dark);font-weight:600;font-size:0.78rem;white-space:nowrap">${q.qid||q.id}</td><td style="color:var(--muted);font-size:0.82rem;max-width:300px">${q.text.length>90?q.text.substring(0,88)+'…':q.text}</td><td style="font-weight:500;font-size:0.88rem">${aStr}</td>`;
+    tb.appendChild(tr);
+  });
+}
+
+function renderFlag(container, f) {
+  const iconMap = {critical:'🔴', high:'🟡', medium:'ℹ️', info:'🟢'};
+  const el = document.createElement('div');
+  el.className = 'flag-card ' + (f.level==='critical'?'critical':f.level==='high'?'high':'');
+  el.innerHTML = `
+    <div class="flag-icon ${f.level}">${iconMap[f.level]||'•'}</div>
+    <div class="flag-body">
+      <div class="flag-level ${f.level}">${f.level==='critical'?'● Directe actie':f.level==='high'?'◑ Actie vereist':f.level==='medium'?'○ Aandachtspunt':'ℹ Informatie'}</div>
+      <div class="flag-name">${f.name}</div>
+      <div class="flag-desc">${f.desc}</div>
+      ${f.legal?`<div class="flag-legal">${f.legal}</div>`:''}
+      ${f.action?`<div class="flag-action">→ ${f.action}</div>`:''}
+    </div>`;
+  container.appendChild(el);
+}
+
+function restartAssessment() {
+  answers = {}; history = []; currentIdx = 0; userEmail = ''; idData = {};
+  ['id_org','id_country','id_kvk','id_name','id_role','id_email','id_appname','id_desc'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  document.getElementById('gate-email').value = '';
+  document.getElementById('btn-gate-submit').disabled = false;
+  document.getElementById('btn-gate-submit').textContent = 'Genereer en ontvang rapport →';
+  showScreen('screen-intro');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PDF GENERATION
+// ═══════════════════════════════════════════════════════════════
+function downloadPDF() {
+  const btn = document.getElementById('btn-dl');
+  btn.textContent = 'Genereren…'; btn.disabled = true;
+  buildPDF();
+  btn.textContent = '↓ Download PDF'; btn.disabled = false;
+}
+
+function buildPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+  const pageW=210, pageH=297, margin=18, cW=174;
+  let y = margin;
+  const allFlags = computeAllFlags();
+  const forbids = computeForbiddenFlags();
+  const docs = computeDocChecklist();
+  const d = new Date().toLocaleDateString('nl-NL',{day:'2-digit',month:'long',year:'numeric'});
+
+  const C = {
+    ink:[47,48,47],muted:[122,116,104],accent:[133,133,204],paper:[237,232,220],
+    cream:[222,218,198],red:[200,64,30],redLt:[245,232,228],amber:[201,132,30],
+    amberLt:[245,237,224],green:[45,122,95],greenLt:[228,240,235],white:[253,250,245]
+  };
+
+  function sf(style,size,col){doc.setFont('helvetica',style);doc.setFontSize(size);doc.setTextColor(...(col||C.ink));}
+  function chk(n){if(y+n>pageH-margin){doc.addPage();y=margin;doc.setDrawColor(...C.cream);doc.setLineWidth(0.3);doc.line(margin,margin-4,pageW-margin,margin-4);}}
+  function dr(x,ry,w,h,fc,sc){if(fc)doc.setFillColor(...fc);if(sc){doc.setDrawColor(...sc);doc.setLineWidth(0.3);}if(fc&&sc)doc.roundedRect(x,ry,w,h,1.5,1.5,'FD');else if(fc)doc.roundedRect(x,ry,w,h,1.5,1.5,'F');}
+  function secHdr(t){chk(16);y+=7;doc.setFillColor(...C.accent);doc.rect(margin,y,3,8,'F');sf('bold',11,C.ink);doc.text(t,margin+7,y+6.5);y+=14;doc.setDrawColor(...C.cream);doc.setLineWidth(0.4);doc.line(margin,y-2,pageW-margin,y-2);}
+
+  // Cover
+  doc.setFillColor(...C.ink);doc.rect(0,0,pageW,58,'F');
+  doc.setFillColor(...C.accent);doc.circle(margin+3,14,2.5,'F');
+  sf('bold',11,C.white);doc.text('EU AI Act Assessment',margin+9,15);
+  sf('normal',7.5,[180,180,220]);doc.text('bg.legal — Volledig Applicability Assessment',margin+9,21);
+  sf('bold',22,C.white);doc.text('EU AI Act',margin,37);
+  sf('italic',15,[180,180,220]);doc.text('Applicability Assessment Rapport',margin,46);
+  const hasB=allFlags.some(f=>f.level==='critical');const hasH=allFlags.some(f=>f.level==='high');
+  const bC=hasForbiddenFlag()?C.red:isHighRisk()||hasB?C.red:hasH?C.amber:C.green;
+  const bL=hasForbiddenFlag()?'VERBODEN':isHighRisk()||hasB?'HOOG RISICO':hasH?'ACTIE VEREIST':'MINIMAAL RISICO';
+  doc.setFillColor(...bC);doc.roundedRect(pageW-margin-52,8,52,11,2,2,'F');
+  sf('bold',7.5,C.white);doc.text(bL,pageW-margin-26,14.5,{align:'center'});
+  y=64;
+
+  // Identification block
+  dr(margin,y,cW,30,C.paper,C.cream);
+  sf('bold',7,C.muted);doc.text('ORGANISATIE',margin+4,y+6);doc.text('TOEPASSING',margin+65,y+6);doc.text('DATUM',margin+135,y+6);
+  sf('normal',9,C.ink);doc.text((idData.org||'').substring(0,28),margin+4,y+13);doc.text((idData.appname||'').substring(0,28),margin+65,y+13);doc.text(d,margin+135,y+13);
+  sf('bold',7,C.muted);doc.text('INVULLER',margin+4,y+21);doc.text('E-MAIL',margin+65,y+21);
+  sf('normal',8,C.ink);doc.text((idData.name||'').substring(0,28),margin+4,y+28);doc.text(userEmail.substring(0,35),margin+65,y+28);
+  y+=38;
+
+  // Part I — Beschrijving
+  secHdr('Deel I — Identificatie & Beschrijving');
+  if(idData.desc){sf('normal',7.5,C.muted);const dL=doc.splitTextToSize(idData.desc,cW);dL.slice(0,10).forEach(l=>{chk(5);doc.text(l,margin,y);y+=4.5;});y+=4;}
+
+  // Part II — Kwalificatie
+  secHdr('Deel II — Kwalificatieoordeel');
+  const kRows=[['Kwalificeert als AI-systeem',isAISystem()?'Ja':'Nee / Grensgeval'],['Territoriaal in scope',isInScope()?'Ja':'Nee'],['Inferentievermogen',answers['m1_3']||'—'],['AI Agent',isAgent()?'Ja':'Nee'],['GPAI-component',hasGPAI()?'Ja':'Nee'],['GPAI-model provider',isGPAIModelProvider()?'Ja':'Nee']];
+  kRows.forEach((row,i)=>{chk(9);if(i%2===0){doc.setFillColor(...C.paper);doc.rect(margin,y,cW,8,'F');}sf('bold',7.5,C.muted);doc.text(row[0],margin+3,y+5.5);sf('normal',8,C.ink);doc.text(row[1].substring(0,50),margin+75,y+5.5);y+=8;});y+=4;
+
+  // Part III — Roles
+  secHdr('Deel III — Rollenmatrix');
+  [{name:'Provider',active:isProvider(),art:'Art. 9-17, 43, 47, 48, 49, 72 EU AI Act'},{name:'Deployer',active:isDeployer(),art:'Art. 26 EU AI Act'},{name:'Importeur',active:isImporter(),art:'Art. 23 EU AI Act'},{name:'Distributeur',active:isDistributor(),art:'Art. 24 EU AI Act'},{name:'GPAI-model provider',active:isGPAIModelProvider(),art:'Art. 53-55 EU AI Act'}].forEach((r,i)=>{
+    chk(9);if(i%2===0){doc.setFillColor(...C.paper);doc.rect(margin,y,cW,8,'F');}
+    sf('bold',8,C.ink);doc.text(r.name,margin+3,y+5.5);
+    const rC=r.active?C.green:C.muted;sf('bold',7.5,rC);doc.text(r.active?'Van toepassing':'Niet van toepassing',margin+55,y+5.5);
+    sf('italic',6.5,C.accent);doc.text(r.active?r.art:'',margin+100,y+5.5);
+    y+=8;
+  });y+=4;
+
+  // Part IV — Verboden
+  secHdr('Deel IV — Verbodsbeoordeling (art. 5)');
+  if(forbids.length===0){chk(10);doc.setFillColor(...C.greenLt);doc.roundedRect(margin,y,cW,9,1.5,1.5,'F');sf('bold',8,C.green);doc.text('Geen verboden praktijken vastgesteld op basis van de verstrekte antwoorden.',margin+4,y+6);y+=13;}
+  else{forbids.forEach((f,idx)=>{const lc={critical:{bg:C.redLt,bd:C.red,tc:C.red,lb:'DIRECTE ACTIE'},high:{bg:C.amberLt,bd:C.amber,tc:C.amber,lb:'ACTIE VEREIST'}}[f.level]||{bg:C.paper,bd:C.accent,tc:C.accent,lb:'INFO'};sf('bold',8,C.ink);const nL=doc.splitTextToSize(f.name,cW-20);sf('normal',7,C.muted);const dL=doc.splitTextToSize(f.desc,cW-20);const cH=7+nL.length*4.5+dL.length*3.8+5;chk(cH+3);doc.setFillColor(...lc.bg);doc.setDrawColor(...lc.bd);doc.setLineWidth(0.3);doc.roundedRect(margin,y,cW,cH,1.5,1.5,'FD');doc.setFillColor(...lc.tc);doc.roundedRect(margin+3,y+3,30,4.5,1,1,'F');sf('bold',5.5,C.white);doc.text(lc.lb,margin+18,y+6,{align:'center'});let cY=y+9;sf('bold',8.5,C.ink);nL.forEach(l=>{doc.text(l,margin+4,cY);cY+=4.5;});cY+=0.5;sf('normal',6.5,C.muted);dL.forEach(l=>{doc.text(l,margin+4,cY);cY+=3.8;});if(f.legal){cY+=1;sf('italic',6,C.accent);doc.text(f.legal.substring(0,80),margin+4,cY);}y+=cH+4;});}
+
+  // Part V — Risicoclassificatie
+  secHdr('Deel V — Risicoclassificatie');
+  const rc=computeRiskClass();const rcC=rc.includes('VERBODEN')||rc.includes('Hoog')?C.red:rc.includes('Beperkt')?C.amber:C.green;
+  chk(14);doc.setFillColor(...(rc.includes('VERBODEN')||rc.includes('Hoog')?C.redLt:rc.includes('Beperkt')?C.amberLt:C.greenLt));doc.roundedRect(margin,y,cW,12,1.5,1.5,'F');sf('bold',10,rcC);doc.text(rc,margin+6,y+8);y+=16;
+  [['Bijlage I — Sectorale productregelgeving',hasHighRiskBijlageI()?'Van toepassing':'Niet van toepassing'],['Bijlage III — Specifieke categorieën',hasHighRiskBijlageIII()?'Categorie(ën) geïdentificeerd':'Geen'],['Art. 6(3) uitzondering',answers['m4_b2']==='yes'?'Ingeroepen':'Niet ingeroepen'],['Transparantieverplichtingen (art. 50)',(isYes('m4_c1')||isYes('m4_c2')||isYes('m4_c3')||isYes('m4_c4')||isYes('m4_c5'))?'Van toepassing':'Niet vastgesteld']].forEach((row,i)=>{chk(9);if(i%2===0){doc.setFillColor(...C.paper);doc.rect(margin,y,cW,8,'F');}sf('bold',7.5,C.muted);doc.text(row[0],margin+3,y+5.5);sf('normal',8,C.ink);doc.text(row[1],margin+85,y+5.5);y+=8;});y+=4;
+
+  // Part VI — GPAI/Agent
+  if(hasGPAI()||isAgent()||isGPAIModelProvider()){secHdr('Deel VI — GPAI & AI Agent');if(notNo('m1_12b')){sf('bold',8.5,C.ink);chk(6);doc.text('GPAI-component geïntegreerd',margin,y);y+=6;sf('normal',7.5,C.muted);const items=[['Documentatie ontvangen',answers['m5_1_3']||'—'],['Contractuele bepalingen',answers['m5_1_4']||'—'],['Systemisch risico geverifieerd',answers['m5_1_5']||'—']];items.forEach(it=>{chk(5);doc.text(it[0]+': '+it[1].substring(0,50),margin+4,y);y+=4.5;});y+=3;}if(isAgent()){sf('bold',8.5,C.ink);chk(6);doc.text('AI Agent vastgesteld',margin,y);y+=6;sf('normal',7.5,C.muted);doc.text('Menselijk toezicht: '+(answers['m5_3_3']||'—'),margin+4,y);y+=5;doc.text('Stop-functie: '+(answers['m5_3_4']||'—'),margin+4,y);y+=5;}y+=3;}
+
+  // Part VII — Flags
+  secHdr('Deel VII — Rode vlaggen & aanbevelingen');
+  const flc={critical:{bg:C.redLt,bd:C.red,tc:C.red,lb:'KRITIEK'},high:{bg:C.amberLt,bd:C.amber,tc:C.amber,lb:'HOOG'},medium:{bg:C.paper,bd:C.accent,tc:C.muted,lb:'MIDDEL'},info:{bg:C.greenLt,bd:C.green,tc:C.green,lb:'INFO'}};
+  allFlags.forEach((f,idx)=>{const lc=flc[f.level]||flc.info;sf('bold',8,C.ink);const nL=doc.splitTextToSize(f.name.substring(0,90),cW-22);sf('normal',7,C.muted);const dL=doc.splitTextToSize(f.desc,cW-22);const aL=f.action?doc.splitTextToSize('→ '+f.action,cW-22):[];const cH=7+nL.length*4.5+dL.length*3.8+(aL.length?aL.length*3.8+2:0)+(f.legal?5:0)+5;chk(cH+3);doc.setFillColor(...lc.bg);doc.setDrawColor(...lc.bd);doc.setLineWidth(0.3);doc.roundedRect(margin,y,cW,cH,1.5,1.5,'FD');doc.setFillColor(...lc.tc);doc.roundedRect(margin+3,y+3,26,4.5,1,1,'F');sf('bold',5.5,C.white);doc.text(lc.lb,margin+16,y+6,{align:'center'});sf('bold',7.5,C.muted);doc.text(String(idx+1).padStart(2,'0'),pageW-margin-5,y+7,{align:'right'});let cY=y+10;sf('bold',8,C.ink);nL.forEach(l=>{doc.text(l,margin+4,cY);cY+=4.5;});cY+=0.5;sf('normal',6.5,C.muted);dL.forEach(l=>{doc.text(l,margin+4,cY);cY+=3.8;});if(f.legal){cY+=1;sf('italic',6,C.accent);doc.text(f.legal.substring(0,80),margin+4,cY);cY+=3.8;}if(aL.length){cY+=1;sf('bold',6.5,C.ink);aL.forEach(l=>{doc.text(l,margin+4,cY);cY+=3.8;});}y+=cH+4;});
+
+  // Part VIII — Docs
+  secHdr('Deel VIII — Vereiste documentatie');
+  if(docs.length===0){chk(8);sf('normal',8,C.muted);doc.text('Geen specifieke documentatieverplichtingen op basis van de vastgestelde classificatie.',margin,y);y+=10;}
+  else{docs.forEach((d,i)=>{chk(7);sf('normal',7,C.muted);doc.text('☐',margin+1,y+4.5);sf('normal',7.5,C.ink);const dl=doc.splitTextToSize(d,cW-12);dl.forEach((l,j)=>{doc.text(l,margin+8,y+4.5+j*4);});y+=Math.max(7,dl.length*4+3);});}
+  y+=4;
+
+  // Answers
+  secHdr('Antwoorden per module');
+  let lastM='';
+  getVisible().forEach(q=>{
+    if(q.module!==lastM){chk(10);y+=2;doc.setFillColor(220,220,240);doc.rect(margin,y,cW,8,'F');sf('bold',7,C.accent);doc.text((MODULES[q.module]||q.module).toUpperCase(),margin+3,y+5.5);y+=10;lastM=q.module;}
+    const ans=answers[q.id];let aStr='-- niet beantwoord';
+    if(ans!==undefined&&ans!==null&&ans!==''){if(Array.isArray(ans)){aStr=ans.map(v=>{const o=q.options?q.options.find(o=>o.value===v):null;return o?o.label:v;}).join(' | ');}else if(q.options){const o=q.options.find(o=>o.value===ans);aStr=o?o.label:ans;}else aStr=ans;}
+    sf('bold',7,C.muted);const qL=doc.splitTextToSize('['+q.qid+'] '+q.text,cW*0.58);sf('normal',6.5,C.ink);const aL=doc.splitTextToSize(aStr,cW*0.38);const rH=Math.max(qL.length*3.8,aL.length*3.8)+5;chk(rH);
+    sf('normal',7,C.muted);qL.forEach((l,i)=>doc.text(l,margin+2,y+3.5+i*3.8));sf('bold',7,C.ink);aL.forEach((l,i)=>doc.text(l,pageW-margin-2,y+3.5+i*3.8,{align:'right'}));
+    doc.setDrawColor(...C.paper);doc.setLineWidth(0.2);doc.line(margin,y+rH-0.5,pageW-margin,y+rH-0.5);y+=rH;
+  });
+
+  // Disclaimer
+  chk(24);y+=5;doc.setFillColor(...C.paper);doc.setDrawColor(...C.cream);doc.setLineWidth(0.3);doc.roundedRect(margin,y,cW,20,1.5,1.5,'FD');sf('bold',7,C.muted);doc.text('DEEL IX — DISCLAIMER',margin+4,y+6);sf('normal',6.5,C.muted);const dis='Dit rapport is een oriënterend instrument op basis van de door de invuller verstrekte informatie. De uitkomsten zijn indicatief en vormen geen juridisch advies. BG.Legal aanvaardt geen aansprakelijkheid voor beslissingen die uitsluitend op dit rapport worden gebaseerd. Raadpleeg een gekwalificeerde jurist.';doc.splitTextToSize(dis,cW-8).forEach((l,i)=>doc.text(l,margin+4,y+11+i*3.5));y+=25;
+
+  // Footer on all pages
+  const tp=doc.internal.getNumberOfPages();
+  for(let p=1;p<=tp;p++){doc.setPage(p);doc.setFillColor(...C.ink);doc.rect(0,pageH-10,pageW,10,'F');sf('normal',6,[180,180,220]);doc.text('bg.legal | info@bg.legal | EU AI Act Applicability Assessment',margin,pageH-4);doc.text('Pagina '+p+' / '+tp,pageW-margin,pageH-4,{align:'right'});}
+
+  const fname = 'EU_AI_Act_Assessment_'+(idData.org||'rapport').replace(/[^a-zA-Z0-9]/g,'_')+'_'+new Date().toISOString().slice(0,10)+'.pdf';
+  doc.save(fname);
+}
+</script>
+</body></html>
